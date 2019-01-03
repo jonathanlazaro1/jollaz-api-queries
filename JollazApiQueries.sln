@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JollazApiQueries.Lib", "lib\JollazApiQueries.Lib.csproj", "{C9BB5CEE-2E29-4809-89E8-4EFF45D2B67E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JollazApiQueries.Models", "models\JollazApiQueries.Models.csproj", "{5515EC37-0758-421C-90A1-BE77291FA976}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,17 @@ Global
 		{C9BB5CEE-2E29-4809-89E8-4EFF45D2B67E}.Release|x64.Build.0 = Release|Any CPU
 		{C9BB5CEE-2E29-4809-89E8-4EFF45D2B67E}.Release|x86.ActiveCfg = Release|Any CPU
 		{C9BB5CEE-2E29-4809-89E8-4EFF45D2B67E}.Release|x86.Build.0 = Release|Any CPU
+		{5515EC37-0758-421C-90A1-BE77291FA976}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5515EC37-0758-421C-90A1-BE77291FA976}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5515EC37-0758-421C-90A1-BE77291FA976}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5515EC37-0758-421C-90A1-BE77291FA976}.Debug|x64.Build.0 = Debug|Any CPU
+		{5515EC37-0758-421C-90A1-BE77291FA976}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5515EC37-0758-421C-90A1-BE77291FA976}.Debug|x86.Build.0 = Debug|Any CPU
+		{5515EC37-0758-421C-90A1-BE77291FA976}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5515EC37-0758-421C-90A1-BE77291FA976}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5515EC37-0758-421C-90A1-BE77291FA976}.Release|x64.ActiveCfg = Release|Any CPU
+		{5515EC37-0758-421C-90A1-BE77291FA976}.Release|x64.Build.0 = Release|Any CPU
+		{5515EC37-0758-421C-90A1-BE77291FA976}.Release|x86.ActiveCfg = Release|Any CPU
+		{5515EC37-0758-421C-90A1-BE77291FA976}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
