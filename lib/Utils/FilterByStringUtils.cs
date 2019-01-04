@@ -12,7 +12,7 @@ namespace JollazApiQueries.Library.Utils
         {
             string parameter = filter.Parameter.ToString();
 
-            // Jogar para lower case se estiver especificado no filtro
+            // Makes param and exp lowercase, if specified in the filter
             if (!filter.MatchCase)
             {
                 MethodInfo methodToLower = typeof(string).GetMethod("ToLower", new Type[0]);

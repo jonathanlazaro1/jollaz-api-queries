@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -12,7 +11,7 @@ namespace JollazApiQueries.Library
     ///<summary>
     /// This class is responsible for doing the main query filtering work.
     ///</summary>
-    public static class QueryFilterUtils
+    public static class QueryFilterExtensions
     {
         ///<summary>
         /// Creates a base expression that will be used in data filter expressions, with support to nested properties.
@@ -87,6 +86,8 @@ namespace JollazApiQueries.Library
                 Expression notNull = null;
                 Expression auxExp = CreateBaseExpression<T>(pe, filter.Name, out prop, out notNull);
 
+                // Check if the property is from a nullable type
+                // Otherwise, stays with the property type
                 var propType = Nullable.GetUnderlyingType(prop.PropertyType);
                 propType = propType ?? prop.PropertyType;
 
@@ -182,7 +183,7 @@ namespace JollazApiQueries.Library
         /// <typeparam name="T">The query data type.</typeparam>
         /// <returns>Returns the query with the filter applied and ready to fetch.</returns>
         ///</summary>
-        public static IQueryable<T> Filter<T>(this IQueryable<T> query, DataRequest dataRequest)
+        public static IQueryable<T> FilterByDataRequest<T>(this IQueryable<T> query, DataRequest dataRequest)
         {
             Expression exp = null;
             Expression auxExp = null;

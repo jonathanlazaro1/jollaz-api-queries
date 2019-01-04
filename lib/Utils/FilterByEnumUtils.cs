@@ -17,7 +17,7 @@ namespace JollazApiQueries.Library.Utils
             var parameter = filter.Parameter;
             string enumName = Enum.GetName(type, parameter);
             if (string.IsNullOrWhiteSpace(enumName))
-                throw new InvalidCastException($"Parameter {parameter} cannot be converted to {prop.PropertyType.Name}");
+                throw new ArrayTypeMismatchException($"Parameter {parameter} cannot be converted to {prop.PropertyType.Name}");
             var enumValue = Enum.Parse(type, enumName);
 
             switch (filter.Criterion)
