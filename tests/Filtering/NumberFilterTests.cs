@@ -5,22 +5,22 @@ using JollazApiQueries.Models.Options;
 using System.Linq;
 using System;
 
-namespace JollazApiQueries.Tests.Filters
+namespace JollazApiQueries.Tests.Filtering
 {
     [TestClass]
-    public class StringFilterTests
+    public class NumberFilterTests
     {
         [TestMethod]
-        public void TestIfQueryIsFilteredByStringEquals()
+        public void TestIfQueryIsFilteredByEquals()
         {
             var dataRequest = TestCommons.CreateDataRequest();
             dataRequest.Filters = new FilterItem[]
             {
                 new FilterItem
                 {
-                    Name = "Name",
+                    Name = "Age",
                     Criterion = FilterCriterion.Equal,
-                    Parameter = "john doe"
+                    Parameter = 21
                 }
             };
             var query = Person.GetPersonQuery();
@@ -32,16 +32,16 @@ namespace JollazApiQueries.Tests.Filters
         }
 
         [TestMethod]
-        public void TestIfQueryIsFilteredByStringContains()
+        public void TestIfQueryIsFilteredByGreaterThanOrEqual()
         {
             var dataRequest = TestCommons.CreateDataRequest();
             dataRequest.Filters = new FilterItem[]
             {
                 new FilterItem
                 {
-                    Name = "Name",
-                    Criterion = FilterCriterion.StringContains,
-                    Parameter = "white"
+                    Name = "Age",
+                    Criterion = FilterCriterion.GreaterThanOrEqual,
+                    Parameter = 39
                 }
             };
             var query = Person.GetPersonQuery();
@@ -52,16 +52,16 @@ namespace JollazApiQueries.Tests.Filters
         }
 
         [TestMethod]
-        public void TestIfQueryIsFilteredByStringStartsWith()
+        public void TestIfQueryIsFilteredByGreaterThan()
         {
             var dataRequest = TestCommons.CreateDataRequest();
             dataRequest.Filters = new FilterItem[]
             {
                 new FilterItem
                 {
-                    Name = "Name",
-                    Criterion = FilterCriterion.StringStartsWith,
-                    Parameter = "white"
+                    Name = "Age",
+                    Criterion = FilterCriterion.GreaterThan,
+                    Parameter = 39
                 }
             };
             var query = Person.GetPersonQuery();
@@ -69,62 +69,59 @@ namespace JollazApiQueries.Tests.Filters
             query = query.FilterByDataRequest(dataRequest);
             
             Assert.AreEqual(1, query.Count());
-            Assert.AreEqual("White Death", query.First().Name);
         }
 
         [TestMethod]
-        public void TestIfQueryIsFilteredByStringEndsWith()
+        public void TestIfQueryIsFilteredByLessThanOrEqual()
         {
             var dataRequest = TestCommons.CreateDataRequest();
             dataRequest.Filters = new FilterItem[]
             {
                 new FilterItem
                 {
-                    Name = "Name",
-                    Criterion = FilterCriterion.StringEndsWith,
-                    Parameter = "white"
+                    Name = "Age",
+                    Criterion = FilterCriterion.LessThanOrEqual,
+                    Parameter = 22
                 }
             };
             var query = Person.GetPersonQuery();
 
             query = query.FilterByDataRequest(dataRequest);
             
-            Assert.AreEqual(1, query.Count());
-            Assert.AreEqual("Snow White", query.First().Name);
+            Assert.AreEqual(3, query.Count());
         }
 
-        [TestMethod]        
-        public void TestIfMatchCaseAffectsStringFilterResults()
+        [TestMethod]
+        public void TestIfQueryIsFilteredByLessThan()
         {
             var dataRequest = TestCommons.CreateDataRequest();
             dataRequest.Filters = new FilterItem[]
             {
                 new FilterItem
                 {
-                    Name = "Name",
-                    Criterion = FilterCriterion.Equal,
-                    Parameter = "john doe",
-                    MatchCase = true
+                    Name = "Age",
+                    Criterion = FilterCriterion.LessThan,
+                    Parameter = 22
                 }
             };
             var query = Person.GetPersonQuery();
 
             query = query.FilterByDataRequest(dataRequest);
             
-            Assert.AreEqual(0, query.Count());
+            Assert.AreEqual(2, query.Count());
         }
 
         [TestMethod]
-        public void TestIfQueryFilteredByStringUnsupportedCriterionThrowsException()
+        public void TestIfQueryFilteredByNumberUnsupportedCriterionThrowsException()
         {
             var dataRequest = TestCommons.CreateDataRequest();
             dataRequest.Filters = new FilterItem[]
             {
                 new FilterItem
                 {
-                    Name = "Name",
-                    Criterion = FilterCriterion.GreaterThanOrEqual,
-                    Parameter = "white"
+                    Name = "Age",
+                    Criterion = FilterCriterion.StringContains,
+                    Parameter = 22
                 }
             };
             var query = Person.GetPersonQuery();

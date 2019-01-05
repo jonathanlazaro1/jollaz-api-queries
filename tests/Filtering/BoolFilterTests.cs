@@ -5,7 +5,7 @@ using JollazApiQueries.Models.Options;
 using System.Linq;
 using System;
 
-namespace JollazApiQueries.Tests.Filters
+namespace JollazApiQueries.Tests.Filtering
 {
     [TestClass]
     public class BoolFilterTests

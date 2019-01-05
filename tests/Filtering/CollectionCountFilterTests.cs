@@ -5,10 +5,10 @@ using JollazApiQueries.Models.Options;
 using System.Linq;
 using System;
 
-namespace JollazApiQueries.Tests.Filters
+namespace JollazApiQueries.Tests.Filtering
 {
     [TestClass]
-    public class NumberFilterTests
+    public class CollectionCountFilterTests
     {
         [TestMethod]
         public void TestIfQueryIsFilteredByEquals()
@@ -18,17 +18,16 @@ namespace JollazApiQueries.Tests.Filters
             {
                 new FilterItem
                 {
-                    Name = "Age",
+                    Name = "Addresses",
                     Criterion = FilterCriterion.Equal,
-                    Parameter = 21
+                    Parameter = 1
                 }
             };
             var query = Person.GetPersonQuery();
 
             query = query.FilterByDataRequest(dataRequest);
             
-            Assert.AreEqual(1, query.Count());
-            Assert.AreEqual(query.First().Name, "John Doe");
+            Assert.AreEqual(4, query.Count());
         }
 
         [TestMethod]
@@ -39,16 +38,16 @@ namespace JollazApiQueries.Tests.Filters
             {
                 new FilterItem
                 {
-                    Name = "Age",
+                    Name = "Addresses",
                     Criterion = FilterCriterion.GreaterThanOrEqual,
-                    Parameter = 39
+                    Parameter = 1
                 }
             };
             var query = Person.GetPersonQuery();
 
             query = query.FilterByDataRequest(dataRequest);
             
-            Assert.AreEqual(2, query.Count());
+            Assert.AreEqual(5, query.Count());
         }
 
         [TestMethod]
@@ -59,9 +58,9 @@ namespace JollazApiQueries.Tests.Filters
             {
                 new FilterItem
                 {
-                    Name = "Age",
+                    Name = "Addresses",
                     Criterion = FilterCriterion.GreaterThan,
-                    Parameter = 39
+                    Parameter = 1
                 }
             };
             var query = Person.GetPersonQuery();
@@ -79,16 +78,16 @@ namespace JollazApiQueries.Tests.Filters
             {
                 new FilterItem
                 {
-                    Name = "Age",
+                    Name = "Addresses",
                     Criterion = FilterCriterion.LessThanOrEqual,
-                    Parameter = 22
+                    Parameter = 2
                 }
             };
             var query = Person.GetPersonQuery();
 
             query = query.FilterByDataRequest(dataRequest);
             
-            Assert.AreEqual(3, query.Count());
+            Assert.AreEqual(5, query.Count());
         }
 
         [TestMethod]
@@ -99,16 +98,16 @@ namespace JollazApiQueries.Tests.Filters
             {
                 new FilterItem
                 {
-                    Name = "Age",
+                    Name = "Addresses",
                     Criterion = FilterCriterion.LessThan,
-                    Parameter = 22
+                    Parameter = 2
                 }
             };
             var query = Person.GetPersonQuery();
 
             query = query.FilterByDataRequest(dataRequest);
             
-            Assert.AreEqual(2, query.Count());
+            Assert.AreEqual(4, query.Count());
         }
 
         [TestMethod]
@@ -119,9 +118,9 @@ namespace JollazApiQueries.Tests.Filters
             {
                 new FilterItem
                 {
-                    Name = "Age",
+                    Name = "Addresses",
                     Criterion = FilterCriterion.StringContains,
-                    Parameter = 22
+                    Parameter = 1
                 }
             };
             var query = Person.GetPersonQuery();
