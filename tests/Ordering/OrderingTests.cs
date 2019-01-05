@@ -1,7 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using JollazApiQueries.Library.Extensions;
 using JollazApiQueries.Models.Requests;
-using JollazApiQueries.Models.Options;
 using System.Linq;
 using System;
 
