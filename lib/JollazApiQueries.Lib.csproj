@@ -25,6 +25,22 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>JollazApiQueries</PackageId>
+    <Title>Jollaz Api Queries</Title>
+    <Version>1.0.0</Version>
+    <PackageDescription></PackageDescription>
+    <Authors>Jonathan Lazaro</Authors>
+    <Company>Jollaz Software</Company>
+    <PackageLicenseUrl>https://github.com/jonathanlazaro1/jollaz-api-queries/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl></PackageProjectUrl>
+    <NeutralLanguage>en</NeutralLanguage>
+    <Copyright>Copyright (c) 2019 Jonathan Lazaro</Copyright>
+    <Description>A .NET Core package to help in the process of consuming query data from APIs.</Description>
+    <RepositoryUrl>https://github.com/jonathanlazaro1/jollaz-api-queries</RepositoryUrl>
+    <PackageReleaseNotes>First release! This first version is mainly a fork from a lot of useful things that I did to consume query data in another project. I basically extracted the main files and created tests. Hope it helps another people like it helped me.
+
+Many thanks to the amazing work of the people maintaining the DynamicLinq project! Half of this package wouldn't work without their code.</PackageReleaseNotes>
+    <PackageTags>query sorting pagination filtering ordering selecting api</PackageTags>
   </PropertyGroup>
 
 </Project>
