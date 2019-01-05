@@ -1,9 +1,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using JollazApiQueries.Library.Extensions;
-using JollazApiQueries.Models.Requests;
-using JollazApiQueries.Models.Options;
 using System.Linq;
 using System;
+using JollazApiQueries.Library.Models.Requests;
+using JollazApiQueries.Library.Models.Options;
 
 namespace JollazApiQueries.Tests.Filtering
 {

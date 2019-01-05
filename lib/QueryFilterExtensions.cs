@@ -2,9 +2,9 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using JollazApiQueries.Library.Models.Options;
+using JollazApiQueries.Library.Models.Requests;
 using JollazApiQueries.Library.Utils;
-using JollazApiQueries.Models.Options;
-using JollazApiQueries.Models.Requests;
 
 namespace JollazApiQueries.Library.Extensions
 {

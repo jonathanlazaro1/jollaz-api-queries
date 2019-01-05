@@ -1,4 +1,4 @@
-namespace JollazApiQueries.Models.Options
+namespace JollazApiQueries.Library.Models.Options
 {
     ///<summary>
     /// Operators to be used to merge filters and/or expressions.

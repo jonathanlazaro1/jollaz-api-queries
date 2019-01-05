@@ -1,8 +1,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using JollazApiQueries.Library.Extensions;
-using JollazApiQueries.Models.Requests;
 using System.Linq;
 using System;
+using JollazApiQueries.Library.Models.Requests;
 
 namespace JollazApiQueries.Tests.Ordering
 {

@@ -1,17 +1,7 @@
-using System.Globalization;
-
-namespace JollazApiQueries.Library.Errors
+namespace JollazApiQueries.Library.Models.Errors
 {
     public class ErrorMessages_por : IErrorMessages
     {
-        public CultureInfo Culture
-        {
-            get
-            {
-                return new CultureInfo("pt");
-            }
-        }
-
         public string NoOfOperatorsXNoOfFilters => "O número de operadores lógicos é incompatível com o número de filtros.";
 
         public string ParameterCastError => "Não foi possível converter o valor do parâmetro para o tipo de dados da propriedade";

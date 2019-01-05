@@ -1,11 +1,7 @@
-using System.Globalization;
-
-namespace JollazApiQueries.Library.Errors
+namespace JollazApiQueries.Library.Models.Errors
 {
     public interface IErrorMessages
     {
-        CultureInfo Culture { get; }
-
         string NoOfOperatorsXNoOfFilters { get; }
 
         string ParameterCastError { get; }

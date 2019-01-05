@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using JollazApiQueries.Models.Options;
+using JollazApiQueries.Library.Models.Options;
 
-namespace JollazApiQueries.Models.Requests
+namespace JollazApiQueries.Library.Models.Requests
 {
     ///<summary>
     /// Class that represents the filters, selections and orderings being applied to a query.

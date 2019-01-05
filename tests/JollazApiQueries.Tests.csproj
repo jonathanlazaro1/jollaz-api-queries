@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\lib\JollazApiQueries.Lib.csproj" />
-    <ProjectReference Include="..\models\JollazApiQueries.Models.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,17 +1,7 @@
-using System.Globalization;
-
-namespace JollazApiQueries.Library.Errors
+namespace JollazApiQueries.Library.Models.Errors
 {
     public class ErrorMessages_eng : IErrorMessages
     {
-        public CultureInfo Culture
-        {
-            get
-            {
-                return new CultureInfo("en-US");
-            }
-        }
-
         public string NoOfOperatorsXNoOfFilters => "The number of logical operators doesn't match with the number of filters.";
 
         public string ParameterCastError => "Could not convert the parameter value to the type of property";

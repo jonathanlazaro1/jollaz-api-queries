@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 
-namespace JollazApiQueries.Models.Results
+namespace JollazApiQueries.Library.Models.Results
 {
     ///<summary>
     /// Class that represents the result of a DataRequest that was applied to a query. The data type of the return collection is unknown.
