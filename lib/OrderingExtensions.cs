@@ -4,26 +4,29 @@ using System.Linq.Dynamic.Core;
 using System.Linq.Dynamic.Core.Exceptions;
 using JollazApiQueries.Models.Requests;
 
-public static class OrderingExtensions
+namespace JollazApiQueries.Library.Extensions
 {
-    public static IQueryable<T> OrderByDataRequest<T>(this IQueryable<T> query, DataRequest request)
+    public static class OrderingExtensions
     {
-        foreach (var ordering in request.Ordering.Reverse())
+        public static IQueryable<T> OrderByDataRequest<T>(this IQueryable<T> query, DataRequest request)
         {
-            query = query.OrderByOrderingItem<T>(ordering);
+            foreach (var ordering in request.Ordering.Reverse())
+            {
+                query = query.OrderByOrderingItem<T>(ordering);
+            }
+            return query;
         }
-        return query;
-    }
 
-    private static IQueryable<T> OrderByOrderingItem<T>(this IQueryable<T> query, OrderingItem ordering)
-    {
-        try
+        private static IQueryable<T> OrderByOrderingItem<T>(this IQueryable<T> query, OrderingItem ordering)
         {
-            return query.OrderBy($"{ordering.Name} {(ordering.Descending ? "desc" : "asc")}");
-        }
-        catch (ParseException)
-        {
-            throw new ArgumentException($"Property not found: {ordering.Name}");
+            try
+            {
+                return query.OrderBy($"{ordering.Name} {(ordering.Descending ? "desc" : "asc")}");
+            }
+            catch (ParseException)
+            {
+                throw new ArgumentException($"{ResourceManagerUtils.ErrorMessages.PropertyNotFound}: {ordering.Name}");
+            }
         }
     }
 }

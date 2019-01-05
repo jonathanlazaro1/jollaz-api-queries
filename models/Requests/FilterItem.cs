@@ -10,12 +10,12 @@ namespace JollazApiQueries.Models.Requests
         ///<summary>
         /// The property name where the filter will be applied.
         ///<para>It's possible to access nested classes properties, using the dot (.) symbol.</para>
-        ///<para>It's not possible to access class collections nested properties.</para>
+        ///<para>It's not possible to access nested properties from class collections.</para>
         ///</summary>
         public string Name { get; set; }
 
         ///<summary>
-        /// Filtering parameter. Must be from the same data type as the property.
+        /// Filtering parameter. Must be from a primitive data type that can be safely casted to the property type.
         ///</summary>
         public object Parameter { get; set; }
 

@@ -12,22 +12,22 @@ namespace JollazApiQueries.Models.Options
         Equal = 0,
 
         ///<summary>
-        /// Field value is equal or lesser than parameter value. Only number (int, decimal, etc) and date/time (DateTime) data types are supported.
+        /// Field value is equal or lesser than parameter value. Only number (int, decimal, etc), date/time (DateTime) data types and collection counts are supported.
         ///</summary>
         LessThanOrEqual = 1,
 
         ///<summary>
-        /// Field value is lesser than parameter value. Only number (int, decimal, etc) and date/time (DateTime) data types are supported.
+        /// Field value is lesser than parameter value. Only number (int, decimal, etc), date/time (DateTime) data types and collection counts are supported.
         ///</summary>
         LessThan = 2,
 
         ///<summary>
-        /// Field value is equal or greater than parameter value. Only number (int, decimal, etc) and date/time (DateTime) data types are supported.
+        /// Field value is equal or greater than parameter value. Only number (int, decimal, etc), date/time (DateTime) data types and collection counts are supported.
         ///</summary>
         GreaterThanOrEqual = 3,
 
         ///<summary>
-        /// Field value is greater than parameter value. Only number (int, decimal, etc) and date/time (DateTime) data types are supported.        
+        /// Field value is greater than parameter value. Only number (int, decimal, etc), date/time (DateTime) data types and collection counts are supported.        
         ///</summary>
         GreaterThan = 4,
 

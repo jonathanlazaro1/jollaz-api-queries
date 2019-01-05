@@ -4,7 +4,7 @@ using System.Linq.Dynamic.Core;
 using System.Linq.Dynamic.Core.Exceptions;
 using JollazApiQueries.Models.Requests;
 
-namespace AlphaAgricola.Api.Data.Queries
+namespace JollazApiQueries.Library.Extensions
 {
     public static class SelectExtensions
     {
@@ -17,7 +17,7 @@ namespace AlphaAgricola.Api.Data.Queries
             }
             catch (ParseException)
             {
-                throw new ArgumentException("Unable to select: some of the provided properties was not found.");
+                throw new ArgumentException(ResourceManagerUtils.ErrorMessages.UnableToSelect);
             }
         }
     }

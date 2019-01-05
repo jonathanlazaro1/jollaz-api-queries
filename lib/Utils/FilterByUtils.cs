@@ -52,7 +52,7 @@ namespace JollazApiQueries.Library.Utils
             bool converted = TryParse(filter.Parameter, typeCode, out parameter);
             if (!converted)
             {
-                throw new InvalidCastException($"Could not convert the parameter value to the type of property: {filter.Name}");
+                throw new InvalidCastException($"{ResourceManagerUtils.ErrorMessages.ParameterCastError} {prop.Name}.");
             }
 
             switch (filter.Criterion)
@@ -73,7 +73,7 @@ namespace JollazApiQueries.Library.Utils
                     exp = Expression.LessThan(exp, Expression.Constant(parameter, prop.PropertyType));
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException($"Criterion {filter.Criterion} is invalid to property {prop.Name}");
+                    throw new ArgumentOutOfRangeException(filter.Criterion.Value.ToString(), $"{ResourceManagerUtils.ErrorMessages.InvalidCriterion}: {prop.Name}");
             }
             return exp;
         }

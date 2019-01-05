@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using JollazApiQueries.Models.Options;
@@ -15,7 +14,7 @@ namespace JollazApiQueries.Library.Utils
             bool converted = FilterByUtils.TryParse(filter.Parameter, TypeCode.Boolean, out parameter);
             if (!converted)
             {
-                throw new InvalidCastException($"Could not convert the parameter value to the type of property: {filter.Name}");
+                throw new InvalidCastException($"{ResourceManagerUtils.ErrorMessages.ParameterCastError}: {filter.Name}");
             }
 
             switch (filter.Criterion)
@@ -24,7 +23,7 @@ namespace JollazApiQueries.Library.Utils
                     exp = Expression.Equal(exp, Expression.Constant(parameter, prop.PropertyType));
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException($"Criterion {filter.Criterion} is invalid to property {prop.Name}");
+                    throw new ArgumentOutOfRangeException(filter.Criterion.Value.ToString(), $"{ResourceManagerUtils.ErrorMessages.InvalidCriterion}: {prop.Name}");
             }
             return exp;
         }

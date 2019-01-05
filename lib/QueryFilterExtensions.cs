@@ -6,7 +6,7 @@ using JollazApiQueries.Library.Utils;
 using JollazApiQueries.Models.Options;
 using JollazApiQueries.Models.Requests;
 
-namespace JollazApiQueries.Library
+namespace JollazApiQueries.Library.Extensions
 {
     ///<summary>
     /// This class is responsible for doing the main query filtering work.
@@ -38,7 +38,7 @@ namespace JollazApiQueries.Library
                 prop = type.GetProperties().SingleOrDefault(p => p.Name.ToLower().Equals(strProp.ToLower()));
                 if (prop == null)
                 {
-                    throw new ArgumentNullException($"Propriedade {args} não encontrada.");
+                    throw new ArgumentException($"{ResourceManagerUtils.ErrorMessages.PropertyNotFound}: {args}");
                 }
 
                 // If prop is a collection
@@ -46,16 +46,19 @@ namespace JollazApiQueries.Library
                 {
                     if (prop.Name.ToLower() != props.Last().ToLower())
                     {
-                        throw new InvalidOperationException("Não é possível filtrar por propriedades aninhadas em coleções");
+                        throw new InvalidOperationException(ResourceManagerUtils.ErrorMessages.NoNestedPropsInCollections);
                     }
                 }
 
                 exp = exp == null ? Expression.Property(pe, prop) : Expression.Property(exp, prop);
                 type = prop.PropertyType;
 
-                if (prop.PropertyType == typeof(string)
+                    
+                if ((!prop.PropertyType.IsEnum) // This is necessary, since enum falls into IsPrimitive condition
+                && (prop.PropertyType == typeof(string)
                     || prop.IsCollection()
-                    || Nullable.GetUnderlyingType(prop.PropertyType) != null)
+                    || !prop.PropertyType.IsPrimitive
+                    || Nullable.GetUnderlyingType(prop.PropertyType) != null))
                 {
                     var notNull = Expression.NotEqual(exp, Expression.Constant(null, prop.PropertyType));
                     expNotNull = expNotNull == null ? notNull : Expression.AndAlso(expNotNull, notNull);
@@ -73,14 +76,14 @@ namespace JollazApiQueries.Library
         private static Expression CreateExpression<T>(FilterItem[] filters, FilterOperator[] operators, ParameterExpression pe)
         {
             if (operators.Count() < filters.Count() - 1)
-                throw new ArgumentException("The number of logical operators doesn't match with the number of filters.");
+                throw new ArgumentException(ResourceManagerUtils.ErrorMessages.NoOfOperatorsXNoOfFilters);
 
             Expression exp = null;
             for (int i = 0; i < filters.Count(); i++)
             {
                 var filter = filters[i];
                 if (filter.Parameter == null && filter.Criterion != FilterCriterion.NotNull)
-                    throw new ArgumentNullException($"Search parameter cannot be null: {filter.Name}");
+                    throw new ArgumentNullException($"{ResourceManagerUtils.ErrorMessages.SearchParameterIsNull}: {filter.Name}");
 
                 PropertyInfo prop = null;
                 Expression notNull = null;
@@ -131,7 +134,7 @@ namespace JollazApiQueries.Library
                             auxExp = FilterByBoolUtils.FilterByBool(auxExp, prop, filter);
                             break;
                         default:
-                            throw new ArgumentOutOfRangeException($"Could not filter to the property: {filter.Name}");
+                            throw new ArgumentOutOfRangeException($"{ResourceManagerUtils.ErrorMessages.PropertyTypeNotSupported}: {filter.Name}");
                     }
                 }
 
@@ -170,7 +173,7 @@ namespace JollazApiQueries.Library
                         e1 = Expression.ExclusiveOr(e1, e2);
                         break;
                     default:
-                        throw new ArgumentOutOfRangeException("Could not infer the supplied logical operator.");
+                        throw new ArgumentOutOfRangeException(ResourceManagerUtils.ErrorMessages.LogicalOperatorOutOfRange);
                 }
             }
             return e1;
@@ -192,7 +195,7 @@ namespace JollazApiQueries.Library
             if (dataRequest.Expressions.Any())
             {
                 if (dataRequest.Operators.Count() < dataRequest.Expressions.Count() - 1)
-                    throw new ArgumentException("The number of logical operators doesn't match with the number of filters.");
+                    throw new ArgumentException(ResourceManagerUtils.ErrorMessages.NoOfOperatorsXNoOfFilters);
 
                 for (int i = 0; i < dataRequest.Expressions.Count(); i++)
                 {

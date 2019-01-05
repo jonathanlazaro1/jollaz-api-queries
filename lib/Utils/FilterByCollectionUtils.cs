@@ -32,7 +32,7 @@ namespace JollazApiQueries.Library.Utils
                     exp = Expression.GreaterThan(exp, Expression.Constant(intParameter, typeof(Int32)));
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException($"Criterion {filter.Criterion} is invalid to property {prop.Name}");
+                    throw new ArgumentOutOfRangeException(filter.Criterion.Value.ToString(), $"{ResourceManagerUtils.ErrorMessages.InvalidCriterion}: {prop.Name}");            
             }
             return exp;
         }

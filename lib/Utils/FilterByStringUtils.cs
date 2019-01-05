@@ -36,7 +36,7 @@ namespace JollazApiQueries.Library.Utils
                     methodName = "EndsWith";
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException($"Criterion {filter.Criterion} is invalid to property {prop.Name}");
+                    throw new ArgumentOutOfRangeException(filter.Criterion.Value.ToString(), $"{ResourceManagerUtils.ErrorMessages.InvalidCriterion}: {prop.Name}");
             }
             if (!string.IsNullOrEmpty(methodName))
             {

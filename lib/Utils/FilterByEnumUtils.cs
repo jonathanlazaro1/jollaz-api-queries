@@ -14,10 +14,15 @@ namespace JollazApiQueries.Library.Utils
                 ? prop.PropertyType 
                 : Nullable.GetUnderlyingType(prop.PropertyType);
 
-            var parameter = filter.Parameter;
+            int parameter = -1;
+            if (!Int32.TryParse(filter.Parameter.ToString(), out parameter))
+            {
+                throw new InvalidCastException($"{ResourceManagerUtils.ErrorMessages.ParameterCastError}: {filter.Name}");
+            }
+
             string enumName = Enum.GetName(type, parameter);
             if (string.IsNullOrWhiteSpace(enumName))
-                throw new ArrayTypeMismatchException($"Parameter {parameter} cannot be converted to {prop.PropertyType.Name}");
+                throw new ArrayTypeMismatchException($"{ResourceManagerUtils.ErrorMessages.ParameterCastError} {prop.PropertyType.Name}.");
             var enumValue = Enum.Parse(type, enumName);
 
             switch (filter.Criterion)
@@ -26,7 +31,7 @@ namespace JollazApiQueries.Library.Utils
                     exp = Expression.Equal(exp, Expression.Constant(enumValue, prop.PropertyType));
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException($"Criterion {filter.Criterion} is invalid to property {prop.Name}");
+                    throw new ArgumentOutOfRangeException(filter.Criterion.Value.ToString(), $"{ResourceManagerUtils.ErrorMessages.InvalidCriterion}: {prop.Name}");
             }
             return exp;
         }
