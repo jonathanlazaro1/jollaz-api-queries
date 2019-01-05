@@ -1,4 +1,6 @@
-/.vs
+/.vs/
+
+/.vscode/
 
 models/bin/
 
