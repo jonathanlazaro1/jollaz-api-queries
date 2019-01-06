@@ -19,5 +19,8 @@ namespace JollazApiQueries.Library.Models.Errors
         public string SearchParameterIsNull => "Parâmetro de pesquisa não pode ser nulo";
 
         public string UnableToSelect => "Não foi possível selecionar: alguma das propriedades fornecidas não foi encontrada.";
+
+        public string NoPropertiesToSelect => "Nenhuma propriedade para selecionar.";
+
     }
 }

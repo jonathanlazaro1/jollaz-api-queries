@@ -17,6 +17,10 @@ namespace JollazApiQueries.Library.Extensions
         ///</summary>
         public static IQueryable SelectByDataRequest<T>(this IQueryable<T> query, DataRequest dataRequest)
         {
+            if (dataRequest.Select.Count() < 1)
+            {
+                throw new ArgumentException($"{ResourceManagerUtils.ErrorMessages.NoPropertiesToSelect}");
+            }
             string ret = string.Join(", ", dataRequest.Select);
             try
             {

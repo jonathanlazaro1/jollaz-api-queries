@@ -19,5 +19,7 @@ namespace JollazApiQueries.Library.Models.Errors
         string SearchParameterIsNull { get; }
 
         string UnableToSelect { get; }
+
+        string NoPropertiesToSelect { get; }
     }
 }
