@@ -23,7 +23,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>JollazApiQueries</PackageId>
     <Title>Jollaz Api Queries</Title>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <PackageDescription></PackageDescription>
     <Authors>Jonathan Lazaro</Authors>
     <Company>Jollaz Software</Company>
@@ -33,7 +33,7 @@
     <Copyright>Copyright (c) 2019 Jonathan Lazaro</Copyright>
     <Description>A .NET Core package to help in the process of consuming query data from APIs.</Description>
     <RepositoryUrl>https://github.com/jonathanlazaro1/jollaz-api-queries</RepositoryUrl>
-    <PackageReleaseNotes>Now the models are in the same project as lib. This resolves the unsolved NuGet dependency that was needed before.</PackageReleaseNotes>
+    <PackageReleaseNotes>Improvements in how a DataResult is obtained.</PackageReleaseNotes>
     <PackageTags>query sorting pagination filtering ordering selecting api</PackageTags>
   </PropertyGroup>
 
