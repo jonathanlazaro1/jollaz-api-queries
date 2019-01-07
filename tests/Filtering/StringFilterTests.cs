@@ -94,7 +94,7 @@ namespace JollazApiQueries.Tests.Filtering
         }
 
         [TestMethod]        
-        public void TestIfMatchCaseAffectsStringFilterResults()
+        public void TestIfMatchCaseAffectsStringDataResults()
         {
             var dataRequest = TestCommons.CreateDataRequest();
             dataRequest.Filters = new FilterItem[]

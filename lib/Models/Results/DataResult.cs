@@ -9,23 +9,23 @@ namespace JollazApiQueries.Library.Models.Results
     ///<summary>
     /// Class that represents the result of a DataRequest that was applied to a query. The data type of the return collection is unknown.
     ///</summary>
-    public class FilterResult
+    public class DataResult
     {
         private int _itemsPerPage;
 
         private int _currentPage;
 
-        public FilterResult()
+        public DataResult()
         {
         }
 
         ///<summary>
-        /// The FilterResult class constructor.
+        /// The DataResult class constructor.
         ///<param name="items">The query which will be filtered.</param>
         ///<param name="itemsPerPage">How many items per page are in the results.</param>
         ///<param name="currentPage">The page where the results are coming from.</param>
         ///</summary>
-        public FilterResult(IQueryable items, int itemsPerPage, int currentPage)
+        public DataResult(IQueryable items, int itemsPerPage, int currentPage)
         {
             this.ItemsTotal = items.Count();
             this.ItemsPerPage = itemsPerPage;
@@ -95,21 +95,21 @@ namespace JollazApiQueries.Library.Models.Results
     /// Class that represents the result of a DataRequest that was applied to a query. The data type of the return collection is defined by the parameter T.
     /// <typeparam name="T">Data type of the return collection.</typeparam>
     ///</summary>
-    public class FilterResult<T> : FilterResult
+    public class DataResult<T> : DataResult
     {
         ///<summary>
-        /// The items collection that will be returned. The collection type is the same of FilterResult.
+        /// The items collection that will be returned. The collection type is the same of DataResult.
         ///</summary>
         /// <typeparam name="T">Data type of the return collection.</typeparam>
         public new IEnumerable<T> Items { get; set; }
 
         ///<summary>
-        /// The FilterResult class constructor.
+        /// The DataResult class constructor.
         ///<param name="itemsTotal">The query which will be filtered.</param>
         ///<param name="itemsPerPage">How many items per page are in the results.</param>
         ///<param name="currentPage">The page where the results are coming from.</param>
         ///</summary>
-        public FilterResult(IQueryable<T> items, int itemsPerPage, int currentPage)
+        public DataResult(IQueryable<T> items, int itemsPerPage, int currentPage)
         {
             this.ItemsTotal = items.Count();
             this.ItemsPerPage = itemsPerPage;

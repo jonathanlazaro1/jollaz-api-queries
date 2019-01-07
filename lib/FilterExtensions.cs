@@ -11,7 +11,7 @@ namespace JollazApiQueries.Library.Extensions
     ///<summary>
     /// This class is responsible for doing the main query filtering work.
     ///</summary>
-    public static class QueryFilterExtensions
+    public static class FilterExtensions
     {
         ///<summary>
         /// Creates a base expression that will be used in data filter expressions, with support to nested properties.
