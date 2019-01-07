@@ -20,7 +20,7 @@ namespace JollazApiQueries.Library.Models.Requests
         public object Parameter { get; set; }
 
         ///<summary>
-        /// Defines if the filtering must consider or not the difference between upper and lowercase letters.
+        /// Defines if the filter must consider or not the difference between upper and lowercase letters.
         /// <para>Only String data type is supported. In all other types, it's ignored.</para>
         /// <para>When not supplied, default value is false.</para>
         ///</summary>

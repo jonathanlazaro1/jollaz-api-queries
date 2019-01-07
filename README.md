@@ -11,7 +11,7 @@ Basically, this package can do three query operations: filtering, sorting, selec
 The DataRequest object is the object coming from the outside world to ask for you data to consuming. It has some essential properties:
 
 #### Filters
-An array of FilterItem objects. They define by which fields the data consumer wants to filter, using what parameter and criteria. Using More than one filter will require one FilterOperator to each new FilterItem added, so we can know how the data consumer wants its filters to be combined.
+An array of FilterItem objects. They define by which propertys the data consumer wants to filter, using what parameter and criteria. Using More than one filter will require one FilterOperator to each new FilterItem added, so we can know how the data consumer wants its filters to be combined.
 
 #### Expressions
 An array of Expression objects. Each Expression has its own array of FilterItems and FilterOperators. You can think about the expression as a parenthesis surrounding FilterItems in order to grouping them. The FilterOperators in Expression help to bind the FilterItems together.
@@ -22,7 +22,7 @@ FilterOperators are the same as logical operators. There are three of them: *AND
 * Binding Filters, if there are more than one of them.
 
 #### Ordering
-An array of OrderingItem objects. Each one translates to the query which field the data consumer wants to sort the data by, and in what direction (ascending/descending).
+An array of OrderingItem objects. Each one translates to the query which property the data consumer wants to sort the data by, and in what direction (ascending/descending).
 
 #### Select
-An array of strings, indicating to query what fields the data consumer wants in return. If it is empty, the resulting query will have the same fields as the original one.
+An array of strings, indicating to query what propertys the data consumer wants in return. If it is empty, the resulting query will have the same propertys as the original one.
