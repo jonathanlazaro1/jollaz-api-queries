@@ -19,13 +19,13 @@ namespace JollazApiQueries.Library.Extensions
             return query;
         }
 
-        public static DataResult<T> Proccess<T>(this DataRequest dataRequest, IQueryable<T> query, bool filtering = true, bool sorting = true)
+        public static DataResult<T> Proccess<T>(this IQueryable<T> query, DataRequest dataRequest, bool filtering = true, bool sorting = true)
         {
             query = ProccessQuery(query, dataRequest, filtering, sorting);
             return new DataResult<T>(query, dataRequest.ItemsPerPage, dataRequest.CurrentPage);
         }
 
-        public static DataResult ProccessAndSelect<T>(this DataRequest dataRequest, IQueryable<T> query, bool filtering = true, bool sorting = true)
+        public static DataResult ProccessAndSelect<T>(this IQueryable<T> query, DataRequest dataRequest, bool filtering = true, bool sorting = true)
         {
             query = ProccessQuery(query, dataRequest, filtering, sorting);
             return new DataResult(query.SelectByDataRequest(dataRequest), dataRequest.ItemsPerPage, dataRequest.CurrentPage);
