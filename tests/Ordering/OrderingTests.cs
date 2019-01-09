@@ -45,6 +45,24 @@ namespace JollazApiQueries.Tests.Ordering
         }
 
         [TestMethod]
+        public void TestIfNestedPropertyOrderingWorks()
+        {
+            var dataRequest = TestCommons.CreateDataRequest();
+            dataRequest.Ordering = new OrderingItem[]
+            {
+                new OrderingItem
+                {
+                    Name = "ContactInfo != null ? ContactInfo.Email : string.Empty"
+                }
+            };
+            var query = Person.GetPersonQuery();
+            query = query.OrderByDataRequest(dataRequest);
+
+            Assert.IsNull(query.First().ContactInfo);
+            Assert.AreEqual("aliciaflorick@hotmail.com", query.ElementAt(2).ContactInfo.Email);
+        }
+
+        [TestMethod]
         public void TestIfInvalidPropertyNameThrowsException()
         {
             var dataRequest = TestCommons.CreateDataRequest();

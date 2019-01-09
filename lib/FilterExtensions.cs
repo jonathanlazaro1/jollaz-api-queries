@@ -5,6 +5,7 @@ using System.Reflection;
 using JollazApiQueries.Library.Models.Options;
 using JollazApiQueries.Library.Models.Requests;
 using JollazApiQueries.Library.Utils;
+using System.Linq.Dynamic.Core;
 
 namespace JollazApiQueries.Library.Extensions
 {
