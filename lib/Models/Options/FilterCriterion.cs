@@ -51,4 +51,26 @@ namespace JollazApiQueries.Library.Models.Options
         ///</summary>
         NotNull = 8
     }
+
+    public class FilterCriteriaUtils
+    {
+        public static string GetCriterionSignByCriterion(FilterCriterion criterion)
+        {
+            switch (criterion)
+            {
+                case FilterCriterion.Equal:
+                    return "==";
+                case FilterCriterion.GreaterThanOrEqual:
+                    return ">=";
+                case FilterCriterion.GreaterThan:
+                    return ">";
+                case FilterCriterion.LessThanOrEqual:
+                    return "<=";
+                case FilterCriterion.LessThan:
+                    return "<";
+                default:
+                    return string.Empty;
+            }
+        }
+    }
 }

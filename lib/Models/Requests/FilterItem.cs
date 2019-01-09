@@ -27,6 +27,12 @@ namespace JollazApiQueries.Library.Models.Requests
         public bool MatchCase { get; set; }
 
         ///<summary>
+        /// Defines if the filter will be parsed as a special expression, without the validations that library usually performs.
+        /// <para>When not supplied, default value is false.</para>
+        ///</summary>
+        public bool IsAdvanced { get; set; }
+
+        ///<summary>
         /// Defines if the filter will be inverted, or if the result will be the opposite of what was supplied to the filter.
         /// <para>When not supplied, default value is false.</para>
         ///</summary>

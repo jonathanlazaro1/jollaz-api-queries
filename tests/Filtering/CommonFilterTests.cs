@@ -27,7 +27,7 @@ namespace JollazApiQueries.Tests.Filtering
                     Parameter = 21
                 }
             };
-        } 
+        }
 
         public DataRequest CreateDataRequestWithTwoFilters()
         {
@@ -78,7 +78,7 @@ namespace JollazApiQueries.Tests.Filtering
                         FilterOperator.And
                     }
                 }
-                
+
             };
             dataRequest.Operators = new FilterOperator[]
             {
@@ -149,6 +149,58 @@ namespace JollazApiQueries.Tests.Filtering
         }
 
         [TestMethod]
+        public void TestIfAdvancedFilterWorks()
+        {
+            var dataRequest = TestCommons.CreateDataRequest();
+            dataRequest.Filters = new FilterItem[]
+            {
+                new FilterItem
+                {
+                    Name = "Addresses.Count",
+                    Criterion = FilterCriterion.GreaterThan,
+                    Parameter = 1,
+                    IsAdvanced = true
+                }
+            };
+            var query = Person.GetPersonQuery();
+            query = query.FilterByDataRequest(dataRequest);
+
+            Assert.AreEqual(2, query.Count());
+        }
+
+        [TestMethod]
+        public void TestIfAdvancedAndTraditionalFiltersWorkTogether()
+        {
+            var dataRequest = TestCommons.CreateDataRequest();
+            dataRequest.Operators = new FilterOperator[]
+            {
+                FilterOperator.And
+            };
+            
+            dataRequest.Filters = new FilterItem[]
+            {
+                new FilterItem
+                {
+                    Name = "Addresses.Count",
+                    Criterion = FilterCriterion.GreaterThan,
+                    Parameter = 1,
+                    IsAdvanced = true
+                },
+                new FilterItem
+                {
+                    Name = "Name",
+                    Criterion = FilterCriterion.StringContains,
+                    Parameter = "snow"
+                },
+            };
+            var query = Person.GetPersonQuery();
+            query = query.FilterByDataRequest(dataRequest);
+
+            Assert.AreEqual(1, query.Count());
+            Assert.AreEqual("Snow White", query.First().Name);
+        }
+
+        [TestMethod]
         public void TestIfNullParameterThrowsException()
         {
             var dataRequest = TestCommons.CreateDataRequest();
@@ -163,7 +215,7 @@ namespace JollazApiQueries.Tests.Filtering
             };
             var query = Person.GetPersonQuery();
 
-            Assert.ThrowsException<ArgumentNullException>(()=>
+            Assert.ThrowsException<ArgumentNullException>(() =>
             {
                 query = query.FilterByDataRequest(dataRequest);
             });
@@ -174,7 +226,7 @@ namespace JollazApiQueries.Tests.Filtering
         {
             var query = Person.GetPersonQuery();
             var dataRequest = this.CreateDataRequestWithTwoFilters();
-            dataRequest.Operators = new FilterOperator[] {};
+            dataRequest.Operators = new FilterOperator[] { };
 
             Assert.ThrowsException<ArgumentException>(() =>
             {
@@ -187,7 +239,7 @@ namespace JollazApiQueries.Tests.Filtering
         {
             var query = Person.GetPersonQuery();
             var dataRequest = this.CreateDataRequestWithExpressions();
-            dataRequest.Operators = new FilterOperator[] {};
+            dataRequest.Operators = new FilterOperator[] { };
 
             Assert.ThrowsException<ArgumentException>(() =>
             {

@@ -16,6 +16,8 @@ namespace JollazApiQueries.Library.Models.Errors
 
         string PropertyTypeNotSupported { get; }
 
+        string OnlySupportedInAdvancedFilter { get; }
+
         string SearchParameterIsNull { get; }
 
         string UnableToSelect { get; }

@@ -16,6 +16,8 @@ namespace JollazApiQueries.Library.Models.Errors
 
         public string PropertyTypeNotSupported => "Property data type is not supported";
 
+        public string OnlySupportedInAdvancedFilter => "This operation is only supported by using an advanced filter.";
+
         public string SearchParameterIsNull => "Search parameter cannot be null";
 
         public string UnableToSelect => "Unable to select: some of the provided properties was not found.";

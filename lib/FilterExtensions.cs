@@ -6,6 +6,7 @@ using JollazApiQueries.Library.Models.Options;
 using JollazApiQueries.Library.Models.Requests;
 using JollazApiQueries.Library.Utils;
 using System.Linq.Dynamic.Core;
+using System.Linq.Dynamic.Core.Parser;
 
 namespace JollazApiQueries.Library.Extensions
 {
@@ -45,16 +46,13 @@ namespace JollazApiQueries.Library.Extensions
                 // If prop is a collection
                 if (prop.IsCollection())
                 {
-                    if (prop.Name.ToLower() != props.Last().ToLower())
-                    {
-                        throw new InvalidOperationException(ResourceManagerUtils.ErrorMessages.NoNestedPropsInCollections);
-                    }
+                    throw new InvalidOperationException(ResourceManagerUtils.ErrorMessages.OnlySupportedInAdvancedFilter);
                 }
 
                 exp = exp == null ? Expression.Property(pe, prop) : Expression.Property(exp, prop);
                 type = prop.PropertyType;
 
-                    
+
                 if ((!prop.PropertyType.IsEnum && prop.PropertyType != typeof(DateTime)) // This is necessary, since enum/DateTime falls into IsPrimitive condition
                 && (prop.PropertyType == typeof(string)
                     || prop.IsCollection()
@@ -83,64 +81,92 @@ namespace JollazApiQueries.Library.Extensions
             for (int i = 0; i < filters.Count(); i++)
             {
                 var filter = filters[i];
-                if (filter.Parameter == null && filter.Criterion != FilterCriterion.NotNull)
-                    throw new ArgumentNullException($"{ResourceManagerUtils.ErrorMessages.SearchParameterIsNull}: {filter.Name}");
 
+                if (filter.Parameter == null)
+                {
+                    throw new ArgumentNullException($"{ResourceManagerUtils.ErrorMessages.SearchParameterIsNull}: {filter.Name}");
+                }
+
+                Expression auxExp = null;
                 PropertyInfo prop = null;
                 Expression notNull = null;
-                Expression auxExp = CreateBaseExpression<T>(pe, filter.Name, out prop, out notNull);
 
-                // Check if the property is from a nullable type
-                // Otherwise, stays with the property type
-                var propType = Nullable.GetUnderlyingType(prop.PropertyType);
-                propType = propType ?? prop.PropertyType;
-
-                if (filter.Criterion == FilterCriterion.NotNull)
+                if (filter.IsAdvanced)
+                // throw new ArgumentNullException($"{ResourceManagerUtils.ErrorMessages.SearchParameterIsNull}: {filter.Name}");
                 {
-                    auxExp = notNull;
-                    notNull = null;
-                }
-                else if (prop.IsCollection())
-                {
-                    auxExp = FilterByCollectionUtils.FilterByCollection(auxExp, prop, filter);
-                }
-                else if (propType.IsEnum)
-                {
-                    auxExp = FilterByEnumUtils.FilterByEnum(auxExp, prop, filter);
+                    try
+                    {
+                        var criterion = FilterCriteriaUtils.GetCriterionSignByCriterion(filter.Criterion.Value);
+                        // auxExp = query.Where($"{filter.Name} {criterion} {filter.Parameter}").Expression;
+                        var parser = new ExpressionParser(
+                            new ParameterExpression[] { pe },
+                            $"{filter.Name} {criterion} @0",
+                            new object[] { filter.Parameter },
+                            ParsingConfig.Default
+                            );
+                        auxExp = parser.Parse(typeof(Boolean), false);
+                        // auxExp = DynamicExpressionParser.ParseLambda(
+                        //     new ParameterExpression[] {pe},
+                        //     null,
+                        //     $"{filter.Name} {criterion} @0",
+                        //     filter.Parameter);
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        throw new ArgumentNullException($"{ResourceManagerUtils.ErrorMessages.SearchParameterIsNull}: {filter.Name}");
+                    }
                 }
                 else
                 {
-                    var typeCode = Type.GetTypeCode(propType);
-                    switch (typeCode)
-                    {
-                        case TypeCode.String:
-                            auxExp = FilterByStringUtils.FilterByString(auxExp, prop, filter);
-                            break;
-                        case TypeCode.Char:
-                            auxExp = FilterByStringUtils.FilterByString(auxExp, prop, filter);
-                            break;
-                        case TypeCode.Int32:
-                            auxExp = FilterByUtils.FilterBy(auxExp, prop, filter, TypeCode.Int32);
-                            break;
-                        case TypeCode.Decimal:
-                            auxExp = FilterByUtils.FilterBy(auxExp, prop, filter, TypeCode.Decimal);
-                            break;
-                        case TypeCode.Double:
-                            auxExp = FilterByUtils.FilterBy(auxExp, prop, filter, TypeCode.Double);
-                            break;
-                        case TypeCode.DateTime:
-                            auxExp = FilterByUtils.FilterBy(auxExp, prop, filter, TypeCode.DateTime);
-                            break;
-                        case TypeCode.Boolean:
-                            auxExp = FilterByBoolUtils.FilterByBool(auxExp, prop, filter);
-                            break;
-                        default:
-                            throw new ArgumentOutOfRangeException($"{ResourceManagerUtils.ErrorMessages.PropertyTypeNotSupported}: {filter.Name}");
-                    }
-                }
+                    auxExp = CreateBaseExpression<T>(pe, filter.Name, out prop, out notNull);
 
-                auxExp = filter.Not ? Expression.Not(auxExp) : auxExp;
-                auxExp = notNull != null ? Expression.AndAlso(notNull, auxExp) : auxExp;
+                    // Check if the property is from a nullable type
+                    // Otherwise, stays with the property type
+                    var propType = Nullable.GetUnderlyingType(prop.PropertyType);
+                    propType = propType ?? prop.PropertyType;
+
+                    if (filter.Criterion == FilterCriterion.NotNull)
+                    {
+                        auxExp = notNull;
+                        notNull = null;
+                    }
+                    else if (propType.IsEnum)
+                    {
+                        auxExp = FilterByEnumUtils.FilterByEnum(auxExp, prop, filter);
+                    }
+                    else
+                    {
+                        var typeCode = Type.GetTypeCode(propType);
+                        switch (typeCode)
+                        {
+                            case TypeCode.String:
+                                auxExp = FilterByStringUtils.FilterByString(auxExp, prop, filter);
+                                break;
+                            case TypeCode.Char:
+                                auxExp = FilterByStringUtils.FilterByString(auxExp, prop, filter);
+                                break;
+                            case TypeCode.Int32:
+                                auxExp = FilterByUtils.FilterBy(auxExp, prop, filter, TypeCode.Int32);
+                                break;
+                            case TypeCode.Decimal:
+                                auxExp = FilterByUtils.FilterBy(auxExp, prop, filter, TypeCode.Decimal);
+                                break;
+                            case TypeCode.Double:
+                                auxExp = FilterByUtils.FilterBy(auxExp, prop, filter, TypeCode.Double);
+                                break;
+                            case TypeCode.DateTime:
+                                auxExp = FilterByUtils.FilterBy(auxExp, prop, filter, TypeCode.DateTime);
+                                break;
+                            case TypeCode.Boolean:
+                                auxExp = FilterByBoolUtils.FilterByBool(auxExp, prop, filter);
+                                break;
+                            default:
+                                throw new ArgumentOutOfRangeException($"{ResourceManagerUtils.ErrorMessages.PropertyTypeNotSupported}: {filter.Name}");
+                        }
+                    }
+                    auxExp = filter.Not ? Expression.Not(auxExp) : auxExp;
+                    auxExp = notNull != null ? Expression.AndAlso(notNull, auxExp) : auxExp;
+                }
 
                 exp = BindExpressions(exp, auxExp, operators.ElementAtOrDefault(i - 1));
             }

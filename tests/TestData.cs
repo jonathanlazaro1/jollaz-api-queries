@@ -113,6 +113,7 @@ namespace JollazApiQueries.Tests
                     Gender = Gender.Female,
                     Addresses =
                     {
+                        new PersonAdress { AddressLine1 = "Some Forest Adress", AddressLine2 = "N/A" },
                         new PersonAdress { AddressLine1 = "Some Forest Adress", AddressLine2 = "N/A" }
                     }
                 },
