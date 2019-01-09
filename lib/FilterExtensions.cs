@@ -54,7 +54,7 @@ namespace JollazApiQueries.Library.Extensions
                 type = prop.PropertyType;
 
                     
-                if ((!prop.PropertyType.IsEnum) // This is necessary, since enum falls into IsPrimitive condition
+                if ((!prop.PropertyType.IsEnum && prop.PropertyType != typeof(DateTime)) // This is necessary, since enum/DateTime falls into IsPrimitive condition
                 && (prop.PropertyType == typeof(string)
                     || prop.IsCollection()
                     || !prop.PropertyType.IsPrimitive
