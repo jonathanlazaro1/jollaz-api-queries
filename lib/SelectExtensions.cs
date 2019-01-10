@@ -15,11 +15,11 @@ namespace JollazApiQueries.Library.Extensions
         /// <typeparam name="T">The query data type.</typeparam>
         /// <returns>Returns an object of type IQueryable, which is a collection of anonymous objects with the properties selected before.</returns>
         ///</summary>
-        public static IQueryable SelectByDataRequest<T>(this IQueryable<T> query, DataRequest dataRequest)
+        public static IQueryable SelectByDataRequest(this IQueryable query, DataRequest dataRequest)
         {
             if (dataRequest.Select.Count() < 1)
             {
-                throw new ArgumentException($"{ResourceManagerUtils.ErrorMessages.NoPropertiesToSelect}");
+               return query;
             }
             string ret = string.Join(", ", dataRequest.Select);
             try

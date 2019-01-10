@@ -21,7 +21,7 @@ namespace JollazApiQueries.Library.Models.Errors
         public string SearchParameterIsNull => "Search parameter cannot be null";
 
         public string UnableToSelect => "Unable to select: some of the provided properties was not found.";
-
-        public string NoPropertiesToSelect => "No properties to select.";
+        
+        public string UnableToGroup => "Unable to group: the instruction provided is invalid.";
     }
 }

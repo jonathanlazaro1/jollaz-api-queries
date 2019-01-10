@@ -16,7 +16,7 @@ namespace JollazApiQueries.Library.Models.Results
         }
 
 
-        public static IEnumerable<GroupedData> FromDynamicQuery(IQueryable data)
+        public static IQueryable<GroupedData> FromDynamicQuery(IQueryable data)
         {
             var ret = new List<GroupedData>();
             foreach (var group in data.ToDynamicList())
@@ -29,7 +29,7 @@ namespace JollazApiQueries.Library.Models.Results
                 }
                 ret.Add(retItem);
             }
-            return ret;
+            return ret.AsQueryable();
         }
     }
 }

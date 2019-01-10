@@ -67,19 +67,6 @@ namespace JollazApiQueries.Tests.Selecting
         }
 
         [TestMethod]
-        public void TestIfEmptySelectionThrowsException()
-        {
-            var dataRequest = TestCommons.CreateDataRequest();
-            var query = Person.GetPersonQuery();
-
-            Assert.ThrowsException<ArgumentException>(() =>
-            {
-                var newQuery = query
-                    .SelectByDataRequest(dataRequest);
-            });
-        }
-
-        [TestMethod]
         public void TestIfInvalidPropertyNameThrowsException()
         {
             var dataRequest = TestCommons.CreateDataRequest();

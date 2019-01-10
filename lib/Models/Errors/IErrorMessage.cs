@@ -22,6 +22,6 @@ namespace JollazApiQueries.Library.Models.Errors
 
         string UnableToSelect { get; }
 
-        string NoPropertiesToSelect { get; }
+        string UnableToGroup { get; }
     }
 }

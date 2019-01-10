@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
+using JollazApiQueries.Library.Extensions;
+using JollazApiQueries.Library.Models.Requests;
 
 namespace JollazApiQueries.Library.Models.Results
 {
@@ -22,19 +24,23 @@ namespace JollazApiQueries.Library.Models.Results
         ///<summary>
         /// The DataResult class constructor.
         ///<param name="items">The query which will be filtered.</param>
-        ///<param name="itemsPerPage">How many items per page are in the results.</param>
+        ///<param name="dataRequest">The DataRequest that will be proccessed.</param>
         ///<param name="currentPage">The page where the results are coming from.</param>
         ///</summary>
-        public DataResult(IQueryable items, int itemsPerPage, int currentPage)
+        public DataResult(IQueryable items, DataRequest dataRequest)
         {
             this.ItemsTotal = items.Count();
-            this.ItemsPerPage = itemsPerPage;
-            this.CurrentPage = currentPage;
+            this.ItemsPerPage = dataRequest.ItemsPerPage;
+            this.CurrentPage = dataRequest.CurrentPage;
 
             this.Items = items
+                .SelectByDataRequest(dataRequest)
                 .Skip(this.ItemsPerPage * (this.CurrentPage - 1))
-                .Take(this.ItemsPerPage)
-                .ToDynamicList();
+                .Take(this.ItemsPerPage);
+            if (!string.IsNullOrEmpty(dataRequest.Grouping))
+            {
+                this.Items = GroupedData.FromDynamicQuery(this.Items);
+            }
         }
 
         ///<summary>
@@ -88,37 +94,6 @@ namespace JollazApiQueries.Library.Models.Results
         ///<summary>
         /// The items collection that will be returned. The collection type is unknown, which allows the custom selection of the return properties.
         ///</summary>
-        public virtual IEnumerable Items { get; set; }
-    }
-
-    ///<summary>
-    /// Class that represents the result of a DataRequest that was applied to a query. The data type of the return collection is defined by the parameter T.
-    /// <typeparam name="T">Data type of the return collection.</typeparam>
-    ///</summary>
-    public class DataResult<T> : DataResult
-    {
-        ///<summary>
-        /// The items collection that will be returned. The collection type is the same of DataResult.
-        ///</summary>
-        /// <typeparam name="T">Data type of the return collection.</typeparam>
-        public new IEnumerable<T> Items { get; set; }
-
-        ///<summary>
-        /// The DataResult class constructor.
-        ///<param name="itemsTotal">The query which will be filtered.</param>
-        ///<param name="itemsPerPage">How many items per page are in the results.</param>
-        ///<param name="currentPage">The page where the results are coming from.</param>
-        ///</summary>
-        public DataResult(IQueryable<T> items, int itemsPerPage, int currentPage)
-        {
-            this.ItemsTotal = items.Count();
-            this.ItemsPerPage = itemsPerPage;
-            this.CurrentPage = currentPage;
-
-            this.Items = items
-                .Skip(this.ItemsPerPage * (this.CurrentPage - 1))
-                .Take(this.ItemsPerPage)
-                .ToList();
-        }
+        public virtual IQueryable Items { get; set; }
     }
 }

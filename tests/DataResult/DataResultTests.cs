@@ -35,47 +35,10 @@ namespace JollazApiQueries.Tests.DataResult
             };
 
             var query = Person.GetPersonQuery();
-            var dataResult = query
-                .Proccess(dataRequest, filtering: true, sorting: true);
+            var dataResult = query.Proccess(dataRequest);
 
             Assert.AreEqual(2, dataResult.ItemsTotal);
             Assert.AreEqual("Snow White", dataResult.Items.First().Name);
-        }
-
-        [TestMethod]
-        public void TestIfDataResultWithAnonymousTypeWorks()
-        {
-            var dataRequest = TestCommons.CreateDataRequest();
-            dataRequest.Filters = new FilterItem[]
-            {
-                // We expect two results with this filter
-                new FilterItem
-                {
-                    Name = "Name",
-                    Criterion = FilterCriterion.StringContains,
-                    Parameter = "white"
-                }
-            };
-            dataRequest.Select = new string[]
-            {
-                "Name",
-                "Age"
-            };
-
-            dataRequest.Ordering = new OrderingItem[]
-            {
-                new OrderingItem
-                {
-                    Name = "Name"
-                }
-            };
-
-            var query = Person.GetPersonQuery();
-            var dataResult = query
-                .ProccessAndSelect(dataRequest, filtering: true, sorting: true);
-
-            Assert.AreEqual(2, dataResult.ItemsTotal);
-            Assert.AreEqual("Snow White", dataResult.Items.ToDynamicList().First().Name);
         }
 
         [TestMethod]
@@ -105,7 +68,7 @@ namespace JollazApiQueries.Tests.DataResult
 
             var query = Person.GetPersonQuery();
             var dataResult = query
-                .Proccess(dataRequest, filtering: true, sorting: true);
+                .Proccess(dataRequest);
 
             Assert.AreEqual(2, dataResult.ItemsTotal);
             Assert.AreEqual(1, dataResult.ItemsPerPage);
@@ -141,7 +104,7 @@ namespace JollazApiQueries.Tests.DataResult
 
             var query = Person.GetPersonQuery();
             var dataResult = query
-                .Proccess(dataRequest, filtering: true, sorting: true);
+                .Proccess(dataRequest);
 
             Assert.AreEqual(2, dataResult.ItemsTotal);
             Assert.AreEqual(1, dataResult.ItemsPerPage);
@@ -176,7 +139,7 @@ namespace JollazApiQueries.Tests.DataResult
 
             var query = Person.GetPersonQuery();
             var dataResult = query
-                .Proccess(dataRequest, filtering: true, sorting: true);
+                .Proccess(dataRequest);
 
             Assert.AreEqual(2, dataResult.ItemsTotal);
             Assert.AreEqual(1, dataResult.ItemsPerPage);
@@ -211,7 +174,7 @@ namespace JollazApiQueries.Tests.DataResult
 
             var query = Person.GetPersonQuery();
             var dataResult = query
-                .Proccess(dataRequest, filtering: true, sorting: true);
+                .Proccess(dataRequest);
 
             Assert.AreEqual(2, dataResult.ItemsTotal);
             Assert.AreEqual(1, dataResult.ItemsPerPage);

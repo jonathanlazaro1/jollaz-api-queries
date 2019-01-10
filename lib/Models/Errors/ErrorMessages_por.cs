@@ -22,7 +22,6 @@ namespace JollazApiQueries.Library.Models.Errors
 
         public string UnableToSelect => "Não foi possível selecionar: alguma das propriedades fornecidas não foi encontrada.";
 
-        public string NoPropertiesToSelect => "Nenhuma propriedade para selecionar.";
-
+        public string UnableToGroup => "Não foi possível agrupar: a instrução fornecida é inválida.";        
     }
 }

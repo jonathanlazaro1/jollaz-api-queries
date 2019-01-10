@@ -48,5 +48,10 @@ namespace JollazApiQueries.Library.Models.Requests
         ///<para>Supports nested properties. Doesn't support nested properties from class collections.</para>
         ///</summary>
         public string[] Select { get; set; } = new string[] { };
+
+        ///<summary>
+        /// String that contains instructions to grouping the result data.
+        ///</summary>
+        public string Grouping { get; set; }
     }
 }
