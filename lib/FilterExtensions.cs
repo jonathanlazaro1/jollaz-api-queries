@@ -84,7 +84,7 @@ namespace JollazApiQueries.Library.Extensions
 
                 if (filter.Parameter == null && filter.Criterion != FilterCriterion.NotNull)
                 {
-                    throw new ArgumentNullException($"{ResourceManagerUtils.ErrorMessages.SearchParameterIsNull}: {filter.Name}");
+                    throw new ArgumentNullException(filter.Name, $"{ResourceManagerUtils.ErrorMessages.SearchParameterIsNull}: {filter.Name}");
                 }
 
                 Expression auxExp = null;
@@ -113,7 +113,7 @@ namespace JollazApiQueries.Library.Extensions
                     }
                     catch (InvalidOperationException)
                     {
-                        throw new ArgumentNullException($"{ResourceManagerUtils.ErrorMessages.SearchParameterIsNull}: {filter.Name}");
+                        throw new ArgumentNullException(filter.Name, $"{ResourceManagerUtils.ErrorMessages.SearchParameterIsNull}: {filter.Name}");
                     }
                 }
                 else
