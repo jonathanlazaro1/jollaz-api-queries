@@ -23,7 +23,7 @@ namespace JollazApiQueries.Library.Utils
                     exp = Expression.Equal(exp, Expression.Constant(parameter, prop.PropertyType));
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(filter.Criterion.Value.ToString(), $"{ResourceManagerUtils.ErrorMessages.InvalidCriterion}: {prop.Name}");
+                    throw new ArgumentOutOfRangeException(filter.Criterion.ToString(), $"{ResourceManagerUtils.ErrorMessages.InvalidCriterion}: {prop.Name}");
             }
             return exp;
         }

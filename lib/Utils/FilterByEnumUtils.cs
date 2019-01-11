@@ -31,7 +31,7 @@ namespace JollazApiQueries.Library.Utils
                     exp = Expression.Equal(exp, Expression.Constant(enumValue, prop.PropertyType));
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(filter.Criterion.Value.ToString(), $"{ResourceManagerUtils.ErrorMessages.InvalidCriterion}: {prop.Name}");
+                    throw new ArgumentOutOfRangeException(filter.Criterion.ToString(), $"{ResourceManagerUtils.ErrorMessages.InvalidCriterion}: {prop.Name}");
             }
             return exp;
         }

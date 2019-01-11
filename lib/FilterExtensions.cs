@@ -82,7 +82,7 @@ namespace JollazApiQueries.Library.Extensions
             {
                 var filter = filters[i];
 
-                if (filter.Parameter == null)
+                if (filter.Parameter == null && filter.Criterion != FilterCriterion.NotNull)
                 {
                     throw new ArgumentNullException($"{ResourceManagerUtils.ErrorMessages.SearchParameterIsNull}: {filter.Name}");
                 }
@@ -96,7 +96,7 @@ namespace JollazApiQueries.Library.Extensions
                 {
                     try
                     {
-                        var criterion = FilterCriteriaUtils.GetCriterionSignByCriterion(filter.Criterion.Value);
+                        var criterion = FilterCriteriaUtils.GetCriterionSignByCriterion(filter.Criterion);
                         // auxExp = query.Where($"{filter.Name} {criterion} {filter.Parameter}").Expression;
                         var parser = new ExpressionParser(
                             new ParameterExpression[] { pe },
