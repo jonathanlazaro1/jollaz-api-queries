@@ -8,10 +8,10 @@ namespace JollazApiQueries.Library.Extensions
     {
         public static DataResult Proccess<T>(this IQueryable<T> query, DataRequest dataRequest)
         {
-            query = query
+            return new DataResult(query
                 .FilterByDataRequest(dataRequest)
-                .OrderByDataRequest(dataRequest);
-            return new DataResult(query, dataRequest);
+                .OrderByDataRequest(dataRequest),
+                dataRequest);
         }
     }
 }

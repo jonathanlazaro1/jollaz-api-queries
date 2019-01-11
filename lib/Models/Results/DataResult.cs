@@ -25,7 +25,6 @@ namespace JollazApiQueries.Library.Models.Results
         /// The DataResult class constructor.
         ///<param name="items">The query which will be filtered.</param>
         ///<param name="dataRequest">The DataRequest that will be proccessed.</param>
-        ///<param name="currentPage">The page where the results are coming from.</param>
         ///</summary>
         public DataResult(IQueryable items, DataRequest dataRequest)
         {
@@ -39,7 +38,7 @@ namespace JollazApiQueries.Library.Models.Results
                 .Take(this.ItemsPerPage);
             if (!string.IsNullOrEmpty(dataRequest.Grouping))
             {
-                this.Items = GroupedData.FromDynamicQuery(this.Items);
+                this.Items = GroupedData.FromDynamicQuery(this.Items.GroupByDataRequest(dataRequest));
             }
         }
 

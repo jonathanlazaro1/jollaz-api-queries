@@ -25,17 +25,15 @@ namespace JollazApiQueries.Tests.Selecting
                 }
             };
             
-            var query = Person.GetPersonQuery();
-            var newQuery = query
-                .OrderByDataRequest(dataRequest)
-                .GroupByDataRequest(dataRequest);
-
-            var groupedData = GroupedData.FromDynamicQuery(newQuery);
+            var query = Person.GetPersonQuery()
+                .FilterByDataRequest(dataRequest)
+                .OrderByDataRequest(dataRequest);
+            var result = new Library.Models.Results.DataResult(query, dataRequest);
 
             // Three countries: Fantasy Land, Russia, United States
-            Assert.AreEqual(3, groupedData.Count());
+            Assert.AreEqual(3, result.Items.Count());
             // Ordered by BirthCountry, so Fantasy Land must be the first group
-            Assert.AreEqual("Fantasy Land", groupedData.First().Key);
+            Assert.AreEqual("Fantasy Land", result.Items.First().Key);
         }
 
         [TestMethod]
