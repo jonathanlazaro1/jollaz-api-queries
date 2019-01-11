@@ -30,6 +30,8 @@ namespace JollazApiQueries.Tests
 
         public DateTime BirthDate { get; set; }
 
+        public string BirthCountry { get; set; }
+
         public int Age
         {
             get
@@ -66,6 +68,7 @@ namespace JollazApiQueries.Tests
                 {
                     Name = "Peter Pan",
                     BirthDate = new DateTime(DateTime.Now.Year - 10, 1, 1),
+                    BirthCountry = "United States",
                     Gender = Gender.Male,
                     ContactInfo = new ContactInfo { Telephone = "(99)9999-1111", Email = "peterpan@neverland.com" },
                     Addresses =
@@ -77,6 +80,7 @@ namespace JollazApiQueries.Tests
                 {
                     Name = "John Doe",
                     BirthDate = new DateTime(DateTime.Now.Year - 21, 1, 1),
+                    BirthCountry = "United States",
                     Gender = Gender.Male,
                     ContactInfo = new ContactInfo { Telephone = "(123)456-7890", Email = "johndoe@gmail.com" },
                     Addresses =
@@ -88,6 +92,7 @@ namespace JollazApiQueries.Tests
                 {
                     Name = "White Death",
                     BirthDate = new DateTime(DateTime.Now.Year - 22, 1, 1),
+                    BirthCountry = "Russia",
                     Gender = Gender.Male,
                     Addresses =
                     {
@@ -98,6 +103,7 @@ namespace JollazApiQueries.Tests
                 {
                     Name = "Alicia Florick",
                     BirthDate = new DateTime(DateTime.Now.Year - 39, 1, 1),
+                    BirthCountry = "United States",
                     Gender = Gender.Female,
                     ContactInfo = new ContactInfo { Telephone = "(11)3210-4567", Email = "aliciaflorick@hotmail.com" },
                     Addresses =
@@ -110,6 +116,7 @@ namespace JollazApiQueries.Tests
                 {
                     Name = "Snow White",
                     BirthDate = new DateTime(DateTime.Now.Year - 150, 1, 1),
+                    BirthCountry = "Fantasy Land",
                     Gender = Gender.Female,
                     Addresses =
                     {
