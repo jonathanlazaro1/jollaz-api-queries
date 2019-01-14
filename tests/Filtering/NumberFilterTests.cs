@@ -4,6 +4,7 @@ using System.Linq;
 using System;
 using JollazApiQueries.Library.Models.Requests;
 using JollazApiQueries.Library.Models.Options;
+using System.Linq.Dynamic.Core;
 
 namespace JollazApiQueries.Tests.Filtering
 {
@@ -25,10 +26,10 @@ namespace JollazApiQueries.Tests.Filtering
             };
             var query = Person.GetPersonQuery();
 
-            query = query.FilterByDataRequest(dataRequest);
+            var newQuery = query.FilterByDataRequest(dataRequest);
             
-            Assert.AreEqual(1, query.Count());
-            Assert.AreEqual(query.First().Name, "John Doe");
+            Assert.AreEqual(1, newQuery.Count());
+            Assert.AreEqual(newQuery.First().Name, "John Doe");
         }
 
         [TestMethod]
@@ -46,9 +47,9 @@ namespace JollazApiQueries.Tests.Filtering
             };
             var query = Person.GetPersonQuery();
 
-            query = query.FilterByDataRequest(dataRequest);
+            var newQuery = query.FilterByDataRequest(dataRequest);
             
-            Assert.AreEqual(2, query.Count());
+            Assert.AreEqual(2, newQuery.Count());
         }
 
         [TestMethod]
@@ -66,9 +67,9 @@ namespace JollazApiQueries.Tests.Filtering
             };
             var query = Person.GetPersonQuery();
 
-            query = query.FilterByDataRequest(dataRequest);
+            var newQuery = query.FilterByDataRequest(dataRequest);
             
-            Assert.AreEqual(1, query.Count());
+            Assert.AreEqual(1, newQuery.Count());
         }
 
         [TestMethod]
@@ -86,9 +87,9 @@ namespace JollazApiQueries.Tests.Filtering
             };
             var query = Person.GetPersonQuery();
 
-            query = query.FilterByDataRequest(dataRequest);
+            var newQuery = query.FilterByDataRequest(dataRequest);
             
-            Assert.AreEqual(3, query.Count());
+            Assert.AreEqual(3, newQuery.Count());
         }
 
         [TestMethod]
@@ -106,9 +107,9 @@ namespace JollazApiQueries.Tests.Filtering
             };
             var query = Person.GetPersonQuery();
 
-            query = query.FilterByDataRequest(dataRequest);
+            var newQuery = query.FilterByDataRequest(dataRequest);
             
-            Assert.AreEqual(2, query.Count());
+            Assert.AreEqual(2, newQuery.Count());
         }
 
         [TestMethod]
@@ -128,7 +129,7 @@ namespace JollazApiQueries.Tests.Filtering
 
             Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
             {
-                query = query.FilterByDataRequest(dataRequest);
+                var newQuery = query.FilterByDataRequest(dataRequest);
             });
         }
     }

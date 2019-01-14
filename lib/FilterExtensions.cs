@@ -213,7 +213,7 @@ namespace JollazApiQueries.Library.Extensions
         /// <typeparam name="T">The query data type.</typeparam>
         /// <returns>Returns the query with the filter applied and ready to fetch.</returns>
         ///</summary>
-        public static IQueryable<T> FilterByDataRequest<T>(this IQueryable<T> query, DataRequest dataRequest)
+        public static IQueryable FilterByDataRequest<T>(this IQueryable<T> query, DataRequest dataRequest)
         {
             Expression exp = null;
             Expression auxExp = null;

@@ -3,6 +3,7 @@ using JollazApiQueries.Library.Extensions;
 using System.Linq;
 using System;
 using JollazApiQueries.Library.Models.Requests;
+using System.Linq.Dynamic.Core;
 
 namespace JollazApiQueries.Tests.Ordering
 {
@@ -21,9 +22,9 @@ namespace JollazApiQueries.Tests.Ordering
                 }
             };
             var query = Person.GetPersonQuery();
-            query = query.OrderByDataRequest(dataRequest);
+            var newQuery = query.OrderByDataRequest(dataRequest);
 
-            Assert.AreEqual("Alicia Florick", query.First().Name);
+            Assert.AreEqual("Alicia Florick", newQuery.First().Name);
         }
 
         [TestMethod]
@@ -39,9 +40,9 @@ namespace JollazApiQueries.Tests.Ordering
                 }
             };
             var query = Person.GetPersonQuery();
-            query = query.OrderByDataRequest(dataRequest);
+            var newQuery = query.OrderByDataRequest(dataRequest);
 
-            Assert.AreEqual(10, query.Last().Age);
+            Assert.AreEqual(10, newQuery.Last().Age);
         }
 
         [TestMethod]
@@ -56,10 +57,10 @@ namespace JollazApiQueries.Tests.Ordering
                 }
             };
             var query = Person.GetPersonQuery();
-            query = query.OrderByDataRequest(dataRequest);
+            var newQuery = query.OrderByDataRequest(dataRequest);
 
-            Assert.IsNull(query.First().ContactInfo);
-            Assert.AreEqual("aliciaflorick@hotmail.com", query.ElementAt(2).ContactInfo.Email);
+            Assert.IsNull(newQuery.First().ContactInfo);
+            Assert.AreEqual("aliciaflorick@hotmail.com", newQuery.Skip(2).First().ContactInfo.Email);
         }
 
         [TestMethod]
@@ -77,7 +78,7 @@ namespace JollazApiQueries.Tests.Ordering
 
             Assert.ThrowsException<ArgumentException>(() =>
             {
-                query = query.OrderByDataRequest(dataRequest);
+                var newQuery = query.OrderByDataRequest(dataRequest);
             });
         }
     }

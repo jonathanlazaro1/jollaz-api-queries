@@ -4,6 +4,7 @@ using System.Linq;
 using System;
 using JollazApiQueries.Library.Models.Requests;
 using JollazApiQueries.Library.Models.Options;
+using System.Linq.Dynamic.Core;
 
 namespace JollazApiQueries.Tests.Filtering
 {
@@ -103,28 +104,28 @@ namespace JollazApiQueries.Tests.Filtering
                 }
             };
             var query = Person.GetPersonQuery();
-            query = query.FilterByDataRequest(dataRequest);
+            var newQuery = query.FilterByDataRequest(dataRequest);
 
-            Assert.AreEqual(1, query.Count());
-            Assert.AreEqual("Peter Pan", query.First().Name);
+            Assert.AreEqual(1, newQuery.Count());
+            Assert.AreEqual("Peter Pan", newQuery.First().Name);
         }
 
         [TestMethod]
         public void TestIfIsPossibleToFilterByFilterItemCollection()
         {
             var query = Person.GetPersonQuery();
-            query = query.FilterByDataRequest(this.CreateDataRequestWithTwoFilters());
+            var newQuery = query.FilterByDataRequest(this.CreateDataRequestWithTwoFilters());
 
-            Assert.AreEqual(1, query.Count());
+            Assert.AreEqual(1, newQuery.Count());
         }
 
         [TestMethod]
         public void TestIfIsPossibleToFilterByExpressions()
         {
             var query = Person.GetPersonQuery();
-            query = query.FilterByDataRequest(this.CreateDataRequestWithExpressions());
+            var newQuery = query.FilterByDataRequest(this.CreateDataRequestWithExpressions());
 
-            Assert.AreEqual(2, query.Count());
+            Assert.AreEqual(2, newQuery.Count());
         }
 
         [TestMethod]
@@ -144,7 +145,7 @@ namespace JollazApiQueries.Tests.Filtering
 
             Assert.ThrowsException<ArgumentException>(() =>
             {
-                query = query.FilterByDataRequest(dataRequest);
+                var newQuery = query.FilterByDataRequest(dataRequest);
             });
         }
 
@@ -163,9 +164,9 @@ namespace JollazApiQueries.Tests.Filtering
                 }
             };
             var query = Person.GetPersonQuery();
-            query = query.FilterByDataRequest(dataRequest);
+            var newQuery = query.FilterByDataRequest(dataRequest);
 
-            Assert.AreEqual(2, query.Count());
+            Assert.AreEqual(2, newQuery.Count());
         }
 
         [TestMethod]
@@ -194,10 +195,10 @@ namespace JollazApiQueries.Tests.Filtering
                 },
             };
             var query = Person.GetPersonQuery();
-            query = query.FilterByDataRequest(dataRequest);
+            var newQuery = query.FilterByDataRequest(dataRequest);
 
-            Assert.AreEqual(1, query.Count());
-            Assert.AreEqual("Snow White", query.First().Name);
+            Assert.AreEqual(1, newQuery.Count());
+            Assert.AreEqual("Snow White", newQuery.First().Name);
         }
 
         [TestMethod]
@@ -217,7 +218,7 @@ namespace JollazApiQueries.Tests.Filtering
 
             Assert.ThrowsException<ArgumentNullException>(() =>
             {
-                query = query.FilterByDataRequest(dataRequest);
+                var newQuery = query.FilterByDataRequest(dataRequest);
             });
         }
 
@@ -230,7 +231,7 @@ namespace JollazApiQueries.Tests.Filtering
 
             Assert.ThrowsException<ArgumentException>(() =>
             {
-                query = query.FilterByDataRequest(dataRequest);
+                var newQuery = query.FilterByDataRequest(dataRequest);
             });
         }
 
@@ -243,7 +244,7 @@ namespace JollazApiQueries.Tests.Filtering
 
             Assert.ThrowsException<ArgumentException>(() =>
             {
-                query = query.FilterByDataRequest(dataRequest);
+                var newQuery = query.FilterByDataRequest(dataRequest);
             });
         }
 
@@ -264,7 +265,7 @@ namespace JollazApiQueries.Tests.Filtering
 
             Assert.ThrowsException<InvalidOperationException>(() =>
             {
-                query = query.FilterByDataRequest(dataRequest);
+                var newQuery = query.FilterByDataRequest(dataRequest);
             });
         }
 
@@ -285,7 +286,7 @@ namespace JollazApiQueries.Tests.Filtering
 
             Assert.ThrowsException<InvalidCastException>(() =>
             {
-                query = query.FilterByDataRequest(dataRequest);
+                var newQuery = query.FilterByDataRequest(dataRequest);
             });
         }
     }
