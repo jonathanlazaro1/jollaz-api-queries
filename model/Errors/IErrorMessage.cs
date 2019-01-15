@@ -1,4 +1,4 @@
-namespace JollazApiQueries.Library.Models.Errors
+namespace JollazApiQueries.Model.Errors
 {
     public interface IErrorMessages
     {

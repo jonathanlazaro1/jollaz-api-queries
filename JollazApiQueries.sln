@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JollazApiQueries.Lib", "lib
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JollazApiQueries.Tests", "tests\JollazApiQueries.Tests.csproj", "{1F873B82-9C94-48FA-AFD6-83D517F1F6A7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JollazApiQueries.Model", "model\JollazApiQueries.Model.csproj", "{F1A75321-C6CE-40CA-8BC4-A887B092F8E6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,5 +46,17 @@ Global
 		{1F873B82-9C94-48FA-AFD6-83D517F1F6A7}.Release|x64.Build.0 = Release|Any CPU
 		{1F873B82-9C94-48FA-AFD6-83D517F1F6A7}.Release|x86.ActiveCfg = Release|Any CPU
 		{1F873B82-9C94-48FA-AFD6-83D517F1F6A7}.Release|x86.Build.0 = Release|Any CPU
+		{F1A75321-C6CE-40CA-8BC4-A887B092F8E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1A75321-C6CE-40CA-8BC4-A887B092F8E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1A75321-C6CE-40CA-8BC4-A887B092F8E6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F1A75321-C6CE-40CA-8BC4-A887B092F8E6}.Debug|x64.Build.0 = Debug|Any CPU
+		{F1A75321-C6CE-40CA-8BC4-A887B092F8E6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F1A75321-C6CE-40CA-8BC4-A887B092F8E6}.Debug|x86.Build.0 = Debug|Any CPU
+		{F1A75321-C6CE-40CA-8BC4-A887B092F8E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1A75321-C6CE-40CA-8BC4-A887B092F8E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1A75321-C6CE-40CA-8BC4-A887B092F8E6}.Release|x64.ActiveCfg = Release|Any CPU
+		{F1A75321-C6CE-40CA-8BC4-A887B092F8E6}.Release|x64.Build.0 = Release|Any CPU
+		{F1A75321-C6CE-40CA-8BC4-A887B092F8E6}.Release|x86.ActiveCfg = Release|Any CPU
+		{F1A75321-C6CE-40CA-8BC4-A887B092F8E6}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

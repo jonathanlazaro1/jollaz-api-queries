@@ -1,4 +1,4 @@
-namespace JollazApiQueries.Library.Models.Requests
+namespace JollazApiQueries.Model.Requests
 {
     ///<summary>
     /// This class represents the ordering to be applied in a query.

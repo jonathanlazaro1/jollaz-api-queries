@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Linq.Dynamic.Core.Exceptions;
-using JollazApiQueries.Library.Models.Requests;
+using JollazApiQueries.Model.Requests;
 
 namespace JollazApiQueries.Library.Extensions
 {

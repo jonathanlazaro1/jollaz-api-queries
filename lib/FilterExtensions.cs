@@ -2,11 +2,11 @@ using System;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using JollazApiQueries.Library.Models.Options;
-using JollazApiQueries.Library.Models.Requests;
 using JollazApiQueries.Library.Utils;
 using System.Linq.Dynamic.Core;
 using System.Linq.Dynamic.Core.Parser;
+using JollazApiQueries.Model.Requests;
+using JollazApiQueries.Model.Options;
 
 namespace JollazApiQueries.Library.Extensions
 {
@@ -213,7 +213,7 @@ namespace JollazApiQueries.Library.Extensions
         /// <typeparam name="T">The query data type.</typeparam>
         /// <returns>Returns the query with the filter applied and ready to fetch.</returns>
         ///</summary>
-        public static IQueryable FilterByDataRequest<T>(this IQueryable<T> query, DataRequest dataRequest)
+        public static IQueryable<T> FilterByDataRequest<T>(this IQueryable<T> query, DataRequest dataRequest)
         {
             Expression exp = null;
             Expression auxExp = null;

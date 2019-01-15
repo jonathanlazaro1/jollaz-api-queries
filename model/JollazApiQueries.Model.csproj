@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>JollazApiQueries.Model</PackageId>
+    <Title>Jollaz Api Queries Model</Title>
+    <Version>1.0.0</Version>
+    <PackageDescription></PackageDescription>
+    <Authors>Jonathan Lazaro</Authors>
+    <Company>Jollaz Software</Company>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl></PackageProjectUrl>
+    <NeutralLanguage>en</NeutralLanguage>
+    <Copyright>Copyright (c) 2019 Jonathan Lazaro</Copyright>
+    <Description>This is the JollazApiQueries models package.</Description>
+    <RepositoryUrl>https://github.com/jonathanlazaro1/jollaz-api-queries</RepositoryUrl>
+    <PackageReleaseNotes>First version. Models decoupled from library.</PackageReleaseNotes>
+    <PackageTags>query sorting grouping pagination filtering ordering selecting api</PackageTags>
+  </PropertyGroup>
+
+</Project>

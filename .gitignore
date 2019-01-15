@@ -2,6 +2,10 @@
 
 /.vscode/
 
+model/bin/
+
+model/obj/
+
 lib/bin/
 
 lib/obj/

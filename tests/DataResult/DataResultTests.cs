@@ -1,10 +1,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using JollazApiQueries.Library.Extensions;
 using System.Linq;
-using System;
 using System.Linq.Dynamic.Core;
-using JollazApiQueries.Library.Models.Requests;
-using JollazApiQueries.Library.Models.Options;
+using JollazApiQueries.Model.Requests;
+using JollazApiQueries.Model.Options;
 
 namespace JollazApiQueries.Tests.DataResult
 {
@@ -38,7 +37,7 @@ namespace JollazApiQueries.Tests.DataResult
             var dataResult = query.Proccess(dataRequest);
 
             Assert.AreEqual(2, dataResult.ItemsTotal);
-            Assert.AreEqual("Snow White", dataResult.Items.First().Name);
+            Assert.AreEqual("Snow White", dataResult.Items.ToDynamicList().First().Name);
         }
 
         [TestMethod]
@@ -74,7 +73,7 @@ namespace JollazApiQueries.Tests.DataResult
             Assert.AreEqual(1, dataResult.ItemsPerPage);
             Assert.AreEqual(2, dataResult.PageCount);
             Assert.AreEqual(2, dataResult.CurrentPage);
-            Assert.AreEqual("White Death", dataResult.Items.First().Name);
+            Assert.AreEqual("White Death", dataResult.Items.ToDynamicList().First().Name);
         }
 
         [TestMethod]

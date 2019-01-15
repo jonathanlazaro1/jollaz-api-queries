@@ -1,8 +1,8 @@
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
-using JollazApiQueries.Library.Models.Options;
-using JollazApiQueries.Library.Models.Requests;
+using JollazApiQueries.Model.Options;
+using JollazApiQueries.Model.Requests;
 
 namespace JollazApiQueries.Library.Utils
 {

@@ -3,9 +3,7 @@ using JollazApiQueries.Library.Extensions;
 using System.Linq;
 using System;
 using System.Linq.Dynamic.Core;
-using JollazApiQueries.Library.Models.Requests;
-using JollazApiQueries.Library.Models.Options;
-using JollazApiQueries.Library.Models.Results;
+using JollazApiQueries.Model.Requests;
 
 namespace JollazApiQueries.Tests.Selecting
 {
@@ -25,15 +23,13 @@ namespace JollazApiQueries.Tests.Selecting
                 }
             };
             
-            var query = Person.GetPersonQuery()
-                .FilterByDataRequest(dataRequest)
-                .OrderByDataRequest(dataRequest);
-            var result = new Library.Models.Results.DataResult(query, dataRequest);
+            var result = Person.GetPersonQuery()
+                .Proccess(dataRequest);
 
             // Three countries: Fantasy Land, Russia, United States
-            Assert.AreEqual(3, result.Items.Count());
+            Assert.AreEqual(3, result.Items.ToDynamicList().Count());
             // Ordered by BirthCountry, so Fantasy Land must be the first group
-            Assert.AreEqual("Fantasy Land", result.Items.First().Key);
+            Assert.AreEqual("Fantasy Land", result.Items.ToDynamicList().First().Key);
         }
 
         [TestMethod]
@@ -55,19 +51,16 @@ namespace JollazApiQueries.Tests.Selecting
             };
             
             var query = Person.GetPersonQuery();
-            var newQuery = query
-                .OrderByDataRequest(dataRequest)
-                .GroupByDataRequest(dataRequest);
 
-            var groupedData = GroupedData.FromDynamicQuery(newQuery);
+            var result = query.Proccess(dataRequest);
 
             /* Three countries: (FL)Fantasy Land, (RUS)Russia, (US)United States
             Two genders: (M)Male, (F)Female
             Four groups: M-RUS, M-US, F-FL, F-US
              */
-            Assert.AreEqual(4, groupedData.Count());
+            Assert.AreEqual(4, result.Items.Count());
             // Ordered by Gender dsc/BirthCountry asc
-            Assert.AreEqual("Snow White", groupedData.First().Values.First().Name);
+            Assert.AreEqual("Snow White", result.Items.ToDynamicList<GroupedData>().First().Values.First().Name);
         }
 
         [TestMethod]
@@ -99,12 +92,10 @@ namespace JollazApiQueries.Tests.Selecting
                 .SelectByDataRequest(dataRequest)
                 .GroupByDataRequest(dataRequest);
 
-            var groupedData = GroupedData.FromDynamicQuery(newQuery);
-
             // Two groups: Male and Female
-            Assert.AreEqual(2, groupedData.Count());
+            Assert.AreEqual(2, newQuery.Count());
             // Ordered by Gender asc/Name dsc, 
-            Assert.AreEqual("White Death", groupedData.First().Values.First().Name);
+            Assert.AreEqual("White Death", newQuery.ToDynamicList<GroupedData>().First().Values.First().Name);
         }
 
         [TestMethod]
