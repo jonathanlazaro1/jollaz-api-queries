@@ -40,7 +40,8 @@ namespace JollazApiQueries.Library.Extensions
 
             return new DataResult(proccessedQuery
                     .Skip(itemsPerPage * (currentPage - 1))
-                    .Take(itemsPerPage),
+                    .Take(itemsPerPage)
+                    .ToDynamicList(),
                 queryCount,
                 pageCount,
                 itemsPerPage,

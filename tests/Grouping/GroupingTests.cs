@@ -58,7 +58,7 @@ namespace JollazApiQueries.Tests.Selecting
             Two genders: (M)Male, (F)Female
             Four groups: M-RUS, M-US, F-FL, F-US
              */
-            Assert.AreEqual(4, result.Items.Count());
+            Assert.AreEqual(4, result.Items.AsQueryable().Count());
             // Ordered by Gender dsc/BirthCountry asc
             Assert.AreEqual("Snow White", result.Items.ToDynamicList<GroupedData>().First().Values.First().Name);
         }
