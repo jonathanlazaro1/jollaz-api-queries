@@ -8,7 +8,14 @@ namespace JollazApiQueries.Model.Results
     public class DataResult
     {
         ///<summary>
-        /// The DataResult class constructor.
+        /// The default DataResult class constructor.
+        ///</summary>
+        public DataResult()
+        {
+        }
+
+        ///<summary>
+        /// The complete DataResult class constructor.
         ///<param name="items">The query which will be filtered. It's assumed that the query is already proccessed and paginated.</param>
         ///<param name="itemsCount">The total number of items on query.</param>
         ///<param name="itemsPerPage">How many items will be returned in this DataResult.</param>
