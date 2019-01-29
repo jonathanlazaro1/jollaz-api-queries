@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Linq.Dynamic.Core;
+using System.Threading.Tasks;
 using JollazApiQueries.Model.Requests;
 using JollazApiQueries.Model.Results;
 
@@ -47,5 +48,29 @@ namespace JollazApiQueries.Library.Extensions
                 itemsPerPage,
                 currentPage);
         }
+
+        public static async Task<DataResult> ProccessAsync<T>(this IQueryable<T> query, DataRequest dataRequest)
+        {
+            var proccessedQuery = query
+                .FilterByDataRequest(dataRequest)
+                .OrderByDataRequest(dataRequest)
+                .SelectByDataRequest(dataRequest)
+                .GroupByDataRequest(dataRequest);
+            
+            var queryCount = proccessedQuery.Count();
+            var itemsPerPage = dataRequest.ItemsPerPage.CalculateItemsPerPage();
+            var pageCount = CalculatePageCount(queryCount, itemsPerPage);
+            var currentPage = CalculateCurrentPage(dataRequest.CurrentPage, pageCount);
+
+            return new DataResult(await proccessedQuery
+                    .Skip(itemsPerPage * (currentPage - 1))
+                    .Take(itemsPerPage)
+                    .ToDynamicListAsync(),
+                queryCount,
+                pageCount,
+                itemsPerPage,
+                currentPage);
+        }
     }
+    
 }
