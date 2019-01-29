@@ -1,4 +1,4 @@
-using System.Collections;
+using System.Linq;
 
 namespace JollazApiQueries.Model.Results
 {
@@ -21,7 +21,7 @@ namespace JollazApiQueries.Model.Results
         ///<param name="itemsPerPage">How many items will be returned in this DataResult.</param>
         ///<param name="currentPage">The current results page.</param>
         ///</summary>
-        public DataResult(ICollection items, int itemsCount, int pageCount, int itemsPerPage, int currentPage)
+        public DataResult(IQueryable items, int itemsCount, int pageCount, int itemsPerPage, int currentPage)
         {
             this.ItemsTotal = itemsCount;
             this.ItemsPerPage = itemsPerPage;
@@ -54,6 +54,6 @@ namespace JollazApiQueries.Model.Results
         ///<summary>
         /// The items collection that will be returned. The collection type is unknown, which allows the custom selection of the return properties.
         ///</summary>
-        public virtual ICollection Items { get; set; }
+        public virtual IQueryable Items { get; set; }
     }
 }

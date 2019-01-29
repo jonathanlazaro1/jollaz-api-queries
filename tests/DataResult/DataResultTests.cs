@@ -42,36 +42,6 @@ namespace JollazApiQueries.Tests.DataResult
         }
 
         [TestMethod]
-        public async Task TestIfAsyncDataResultWorks()
-        {
-            var dataRequest = TestCommons.CreateDataRequest();
-            dataRequest.Filters = new FilterItem[]
-            {
-                // We expect two results with this filter
-                new FilterItem
-                {
-                    Name = "Name",
-                    Criterion = FilterCriterion.StringContains,
-                    Parameter = "white"
-                }
-            };
-
-            dataRequest.Ordering = new OrderingItem[]
-            {
-                new OrderingItem
-                {
-                    Name = "Name"
-                }
-            };
-
-            var query = Person.GetPersonQuery();
-            var dataResult = await query.ProccessAsync(dataRequest);
-
-            Assert.AreEqual(2, dataResult.ItemsTotal);
-            Assert.AreEqual("Snow White", dataResult.Items.ToDynamicList().First().Name);
-        }
-
-        [TestMethod]
         public void TestIfPaginationWorks()
         {
             var dataRequest = TestCommons.CreateDataRequest();

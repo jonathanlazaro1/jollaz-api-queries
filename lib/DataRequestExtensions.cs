@@ -41,31 +41,7 @@ namespace JollazApiQueries.Library.Extensions
 
             return new DataResult(proccessedQuery
                     .Skip(itemsPerPage * (currentPage - 1))
-                    .Take(itemsPerPage)
-                    .ToDynamicList(),
-                queryCount,
-                pageCount,
-                itemsPerPage,
-                currentPage);
-        }
-
-        public static async Task<DataResult> ProccessAsync<T>(this IQueryable<T> query, DataRequest dataRequest)
-        {
-            var proccessedQuery = query
-                .FilterByDataRequest(dataRequest)
-                .OrderByDataRequest(dataRequest)
-                .SelectByDataRequest(dataRequest)
-                .GroupByDataRequest(dataRequest);
-            
-            var queryCount = proccessedQuery.Count();
-            var itemsPerPage = dataRequest.ItemsPerPage.CalculateItemsPerPage();
-            var pageCount = CalculatePageCount(queryCount, itemsPerPage);
-            var currentPage = CalculateCurrentPage(dataRequest.CurrentPage, pageCount);
-
-            return new DataResult(await proccessedQuery
-                    .Skip(itemsPerPage * (currentPage - 1))
-                    .Take(itemsPerPage)
-                    .ToDynamicListAsync(),
+                    .Take(itemsPerPage),
                 queryCount,
                 pageCount,
                 itemsPerPage,
