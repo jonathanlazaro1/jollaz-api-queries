@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 
 namespace JollazApiQueries.Model.Results
 {
@@ -28,7 +30,7 @@ namespace JollazApiQueries.Model.Results
             this.PageCount = pageCount;
             this.CurrentPage = currentPage;
 
-            this.Items = items;
+            this.Items = items.ToDynamicList();
         }
 
         ///<summary>
@@ -54,6 +56,6 @@ namespace JollazApiQueries.Model.Results
         ///<summary>
         /// The items collection that will be returned. The collection type is unknown, which allows the custom selection of the return properties.
         ///</summary>
-        public virtual IQueryable Items { get; set; }
+        public ICollection<dynamic> Items { get; set; }
     }
 }
