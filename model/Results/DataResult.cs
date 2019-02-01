@@ -58,4 +58,17 @@ namespace JollazApiQueries.Model.Results
         ///</summary>
         public ICollection<dynamic> Items { get; set; }
     }
+
+    public class DataResult<T>
+    {
+        public int ItemsTotal { get; set; }
+
+        public int ItemsPerPage { get; set; }
+
+        public int CurrentPage { get; set; }
+
+        public int PageCount { get; set; }
+
+        public ICollection<T> Items { get; set; }
+    }
 }
