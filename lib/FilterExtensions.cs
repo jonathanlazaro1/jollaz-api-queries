@@ -53,7 +53,7 @@ namespace JollazApiQueries.Library.Extensions
                 type = prop.PropertyType;
 
 
-                if ((!prop.PropertyType.IsEnum && prop.PropertyType != typeof(DateTime)) // This is necessary, since enum/DateTime falls into IsPrimitive condition
+                if ((!prop.PropertyType.IsEnum && prop.PropertyType != typeof(DateTime) && prop.PropertyType != typeof(Guid)) // This is necessary, since enum/DateTime falls into IsPrimitive condition
                 && (prop.PropertyType == typeof(string)
                     || prop.IsCollection()
                     || !prop.PropertyType.IsPrimitive
@@ -133,6 +133,10 @@ namespace JollazApiQueries.Library.Extensions
                     else if (propType.IsEnum)
                     {
                         auxExp = FilterByEnumUtils.FilterByEnum(auxExp, prop, filter);
+                    }
+                    else if (propType == typeof(Guid))
+                    {
+                        auxExp = FilterByGuidUtils.FilterByGuid(auxExp, prop, filter);
                     }
                     else
                     {

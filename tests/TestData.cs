@@ -26,6 +26,8 @@ namespace JollazApiQueries.Tests
 
     public class Person
     {
+        public Guid? Id { get; set; }
+
         public string Name { get; set; }
 
         public DateTime BirthDate { get; set; }
@@ -66,6 +68,7 @@ namespace JollazApiQueries.Tests
             {
                 new Person
                 {
+                    Id = new Guid("74a46e33-09b3-4f90-9818-7ca3609f887f"),
                     Name = "Peter Pan",
                     BirthDate = new DateTime(DateTime.Now.Year - 10, 1, 1),
                     BirthCountry = "United States",
