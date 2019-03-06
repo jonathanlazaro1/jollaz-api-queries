@@ -157,16 +157,16 @@ namespace JollazApiQueries.Tests.Filtering
             {
                 new FilterItem
                 {
-                    Name = "Addresses.Count",
-                    Criterion = FilterCriterion.GreaterThan,
-                    Parameter = 1,
+                    Name = "ContactInfo.Email",
+                    Criterion = FilterCriterion.Equal,
+                    Parameter = "aliciaflorick@hotmail.com",
                     IsAdvanced = true
                 }
             };
             var query = Person.GetPersonQuery();
             var newQuery = query.FilterByDataRequest(dataRequest);
 
-            Assert.AreEqual(2, newQuery.Count());
+            Assert.AreEqual(1, newQuery.Count());
         }
 
         [TestMethod]
@@ -263,7 +263,7 @@ namespace JollazApiQueries.Tests.Filtering
             };
             var query = Person.GetPersonQuery();
 
-            Assert.ThrowsException<InvalidOperationException>(() =>
+            Assert.ThrowsException<ArgumentException>(() =>
             {
                 var newQuery = query.FilterByDataRequest(dataRequest);
             });

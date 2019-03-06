@@ -15,6 +15,69 @@ namespace JollazApiQueries.Library.Extensions
     ///</summary>
     public static class FilterExtensions
     {
+        private static bool CanBeNull(PropertyInfo prop)
+        {
+            return (!prop.PropertyType.IsEnum && prop.PropertyType != typeof(DateTime) && prop.PropertyType != typeof(Guid)) // This is necessary, since enum/DateTime falls into IsPrimitive condition
+                && (prop.PropertyType == typeof(string)
+                    || prop.IsCollection()
+                    || !prop.PropertyType.IsPrimitive
+                    || Nullable.GetUnderlyingType(prop.PropertyType) != null);
+        }
+
+        private static Expression BindNotNullExpression(Expression exp, Expression notNull)
+        {
+            return notNull != null ? Expression.AndAlso(notNull, exp) : exp;
+        }
+
+        private static Expression CreateNotNullCheckExpression(PropertyInfo prop, Expression exp)
+        {
+            if (CanBeNull(prop))
+            {
+                return Expression.NotEqual(exp, Expression.Constant(null, prop.PropertyType));
+            }
+            return null;
+        }
+
+        private static PropertyInfo GetPropertyInfo(Type type, string args)
+        {
+            PropertyInfo prop = null;
+            var props = args.Split('.');
+
+            foreach (var strProp in props)
+            {
+                prop = type.GetProperties().SingleOrDefault(p => p.Name.ToLower().Equals(strProp.ToLower()));
+                if (prop == null)
+                {
+                    throw new ArgumentException($"{ResourceManagerUtils.ErrorMessages.PropertyNotFound}: {args}");
+                }
+                type = prop.PropertyType;
+            }
+            return prop;
+        }
+
+        private static Expression GetPropertyExpression<T>(ParameterExpression pe, string args, out PropertyInfo prop, out Expression expNotNull)
+        {
+            prop = null;
+            expNotNull = null;
+            Expression exp = null;
+            var type = typeof(T);
+            var props = args.Split('.');
+
+            foreach (var strProp in props)
+            {
+                prop = GetPropertyInfo(type, strProp);
+
+                exp = exp == null ? Expression.Property(pe, prop) : Expression.Property(exp, prop);
+                type = prop.PropertyType;
+
+                var notNull = CreateNotNullCheckExpression(prop, exp);
+                if (notNull != null)
+                {
+                    expNotNull = expNotNull == null ? notNull : Expression.AndAlso(expNotNull, notNull);
+                }
+            }
+            return exp;
+        }
         ///<summary>
         /// Creates a base expression that will be used in data filter expressions, with support to nested properties.
         /// <para>Must return the found property based on the informed argument.</para>
@@ -29,41 +92,9 @@ namespace JollazApiQueries.Library.Extensions
         private static Expression CreateBaseExpression<T>(ParameterExpression pe, string args, out PropertyInfo prop, out Expression expNotNull)
         {
             prop = null;
-            var props = args.Split('.');
-            var type = typeof(T);
-
-            Expression exp = null;
             expNotNull = null;
 
-            foreach (var strProp in props)
-            {
-                prop = type.GetProperties().SingleOrDefault(p => p.Name.ToLower().Equals(strProp.ToLower()));
-                if (prop == null)
-                {
-                    throw new ArgumentException($"{ResourceManagerUtils.ErrorMessages.PropertyNotFound}: {args}");
-                }
-
-                // If prop is a collection
-                if (prop.IsCollection())
-                {
-                    throw new InvalidOperationException(ResourceManagerUtils.ErrorMessages.OnlySupportedInAdvancedFilter);
-                }
-
-                exp = exp == null ? Expression.Property(pe, prop) : Expression.Property(exp, prop);
-                type = prop.PropertyType;
-
-
-                if ((!prop.PropertyType.IsEnum && prop.PropertyType != typeof(DateTime) && prop.PropertyType != typeof(Guid)) // This is necessary, since enum/DateTime falls into IsPrimitive condition
-                && (prop.PropertyType == typeof(string)
-                    || prop.IsCollection()
-                    || !prop.PropertyType.IsPrimitive
-                    || Nullable.GetUnderlyingType(prop.PropertyType) != null))
-                {
-                    var notNull = Expression.NotEqual(exp, Expression.Constant(null, prop.PropertyType));
-                    expNotNull = expNotNull == null ? notNull : Expression.AndAlso(expNotNull, notNull);
-                }
-            }
-            return exp;
+            return GetPropertyExpression<T>(pe, args, out prop, out expNotNull);
         }
 
         ///<summary>
@@ -90,26 +121,20 @@ namespace JollazApiQueries.Library.Extensions
                 Expression auxExp = null;
                 PropertyInfo prop = null;
                 Expression notNull = null;
+                auxExp = CreateBaseExpression<T>(pe, filter.Name, out prop, out notNull);
 
                 if (filter.IsAdvanced)
-                // throw new ArgumentNullException($"{ResourceManagerUtils.ErrorMessages.SearchParameterIsNull}: {filter.Name}");
                 {
                     try
                     {
                         var criterion = FilterCriteriaUtils.GetCriterionSignByCriterion(filter.Criterion);
-                        // auxExp = query.Where($"{filter.Name} {criterion} {filter.Parameter}").Expression;
+
                         var parser = new ExpressionParser(
                             new ParameterExpression[] { pe },
                             $"{filter.Name} {criterion} @0",
                             new object[] { filter.Parameter },
-                            ParsingConfig.Default
-                            );
+                            ParsingConfig.Default);
                         auxExp = parser.Parse(typeof(Boolean), false);
-                        // auxExp = DynamicExpressionParser.ParseLambda(
-                        //     new ParameterExpression[] {pe},
-                        //     null,
-                        //     $"{filter.Name} {criterion} @0",
-                        //     filter.Parameter);
                     }
                     catch (InvalidOperationException)
                     {
@@ -118,8 +143,11 @@ namespace JollazApiQueries.Library.Extensions
                 }
                 else
                 {
-                    auxExp = CreateBaseExpression<T>(pe, filter.Name, out prop, out notNull);
-
+                    // If prop is a collection
+                    if (prop.IsCollection())
+                    {
+                        throw new InvalidOperationException(ResourceManagerUtils.ErrorMessages.OnlySupportedInAdvancedFilter);
+                    }
                     // Check if the property is from a nullable type
                     // Otherwise, stays with the property type
                     var propType = Nullable.GetUnderlyingType(prop.PropertyType);
@@ -169,9 +197,8 @@ namespace JollazApiQueries.Library.Extensions
                         }
                     }
                     auxExp = filter.Not ? Expression.Not(auxExp) : auxExp;
-                    auxExp = notNull != null ? Expression.AndAlso(notNull, auxExp) : auxExp;
                 }
-
+                auxExp = notNull != null ? Expression.AndAlso(notNull, auxExp) : auxExp;
                 exp = BindExpressions(exp, auxExp, operators.ElementAtOrDefault(i - 1));
             }
             return exp;
