@@ -3,7 +3,7 @@ using JollazApiQueries.Library.Extensions;
 using System.Linq;
 using System;
 using System.Linq.Dynamic.Core;
-using JollazApiQueries.Model.Requests;
+using JollazApiQueries.Model.Core;
 
 namespace JollazApiQueries.Tests.Selecting
 {

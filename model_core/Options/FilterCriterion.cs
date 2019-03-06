@@ -1,4 +1,4 @@
-namespace JollazApiQueries.Model.Options
+namespace JollazApiQueries.Model.Core
 {
     ///<summary>
     /// Criterion to be used when applying a filter.

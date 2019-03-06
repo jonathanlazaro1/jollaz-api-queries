@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JollazApiQueries.Tests", "t
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JollazApiQueries.Model", "model\JollazApiQueries.Model.csproj", "{F1A75321-C6CE-40CA-8BC4-A887B092F8E6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JollazApiQueries.Model.Core", "model_core\JollazApiQueries.Model.Core.csproj", "{577BF6B2-B206-4C23-A3AD-7DC11B85178E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,5 +60,17 @@ Global
 		{F1A75321-C6CE-40CA-8BC4-A887B092F8E6}.Release|x64.Build.0 = Release|Any CPU
 		{F1A75321-C6CE-40CA-8BC4-A887B092F8E6}.Release|x86.ActiveCfg = Release|Any CPU
 		{F1A75321-C6CE-40CA-8BC4-A887B092F8E6}.Release|x86.Build.0 = Release|Any CPU
+		{577BF6B2-B206-4C23-A3AD-7DC11B85178E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{577BF6B2-B206-4C23-A3AD-7DC11B85178E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{577BF6B2-B206-4C23-A3AD-7DC11B85178E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{577BF6B2-B206-4C23-A3AD-7DC11B85178E}.Debug|x64.Build.0 = Debug|Any CPU
+		{577BF6B2-B206-4C23-A3AD-7DC11B85178E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{577BF6B2-B206-4C23-A3AD-7DC11B85178E}.Debug|x86.Build.0 = Debug|Any CPU
+		{577BF6B2-B206-4C23-A3AD-7DC11B85178E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{577BF6B2-B206-4C23-A3AD-7DC11B85178E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{577BF6B2-B206-4C23-A3AD-7DC11B85178E}.Release|x64.ActiveCfg = Release|Any CPU
+		{577BF6B2-B206-4C23-A3AD-7DC11B85178E}.Release|x64.Build.0 = Release|Any CPU
+		{577BF6B2-B206-4C23-A3AD-7DC11B85178E}.Release|x86.ActiveCfg = Release|Any CPU
+		{577BF6B2-B206-4C23-A3AD-7DC11B85178E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

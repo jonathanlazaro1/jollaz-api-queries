@@ -1,6 +1,4 @@
-using JollazApiQueries.Model.Options;
-
-namespace JollazApiQueries.Model.Requests
+namespace JollazApiQueries.Model.Core
 {
     ///<summary>
     /// This class represents an expression, which is defined by a number of filters and its operators. All the expression filters are applied together.

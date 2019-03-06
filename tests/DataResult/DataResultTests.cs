@@ -2,9 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using JollazApiQueries.Library.Extensions;
 using System.Linq;
 using System.Linq.Dynamic.Core;
-using JollazApiQueries.Model.Requests;
-using JollazApiQueries.Model.Options;
-using System.Threading.Tasks;
+using JollazApiQueries.Model.Core;
 
 namespace JollazApiQueries.Tests.DataResult
 {

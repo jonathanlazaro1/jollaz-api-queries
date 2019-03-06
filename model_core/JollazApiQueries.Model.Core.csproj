@@ -2,9 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageId>JollazApiQueries.Model</PackageId>
-    <Title>Jollaz Api Queries Model</Title>
-    <Version>1.1</Version>
+    <PackageId>JollazApiQueries.Model.Core</PackageId>
+    <Title>Jollaz Api Queries Core Model</Title>
+    <Version>1.0</Version>
     <PackageDescription></PackageDescription>
     <Authors>Jonathan Lazaro</Authors>
     <Company>Jollaz Software</Company>
@@ -12,18 +12,10 @@
     <PackageProjectUrl></PackageProjectUrl>
     <NeutralLanguage>en</NeutralLanguage>
     <Copyright>Copyright (c) 2019 Jonathan Lazaro</Copyright>
-    <Description>This is the JollazApiQueries models package.</Description>
+    <Description>This is the JollazApiQueries core model package.</Description>
     <RepositoryUrl>https://github.com/jonathanlazaro1/jollaz-api-queries</RepositoryUrl>
-    <PackageReleaseNotes>This package is needed only if you need dynamic DataResults. If you don't, use the Model.Core version which is free from Linq.Dynamic.Core dependency.</PackageReleaseNotes>
+    <PackageReleaseNotes>This version is free from Linq.Dynamic.Core dependency. Also, the namespaces were simplified.</PackageReleaseNotes>
     <PackageTags>query sorting grouping pagination filtering ordering selecting api</PackageTags>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.11" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\model_core\JollazApiQueries.Model.Core.csproj" />
-  </ItemGroup>
 
 </Project>

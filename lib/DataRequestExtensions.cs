@@ -1,9 +1,8 @@
 using System;
 using System.Linq;
 using System.Linq.Dynamic.Core;
-using System.Threading.Tasks;
-using JollazApiQueries.Model.Requests;
-using JollazApiQueries.Model.Results;
+using JollazApiQueries.Model;
+using JollazApiQueries.Model.Core;
 
 namespace JollazApiQueries.Library.Extensions
 {

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Linq.Dynamic.Core.Exceptions;
-using JollazApiQueries.Model.Requests;
+using JollazApiQueries.Model.Core;
+using JollazApiQueries.Model.Core.Errors;
 
 namespace JollazApiQueries.Library.Extensions
 {

@@ -1,4 +1,4 @@
-using JollazApiQueries.Model.Requests;
+using JollazApiQueries.Model.Core;
 
 namespace JollazApiQueries.Tests
 {

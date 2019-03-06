@@ -1,6 +1,4 @@
-using JollazApiQueries.Model.Options;
-
-namespace JollazApiQueries.Model.Requests
+namespace JollazApiQueries.Model.Core
 {
     ///<summary>
     /// This class represents the filter item to be applied in a query.
