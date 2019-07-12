@@ -1,0 +1,32 @@
+{
+  "name": "jollaz-api-queries",
+  "version": "1.0.0",
+  "description": "Package to consume data that comes from the JollazApiQueries C# package.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonathanlazaro1/jollaz-api-queries.git"
+  },
+  "keywords": [
+    "jollaz",
+    "api",
+    "query",
+    "sorting",
+    "grouping",
+    "pagination",
+    "filtering",
+    "ordering",
+    "selecting",
+    "api"
+  ],
+  "author": "Jonathan Lazaro",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jonathanlazaro1/jollaz-api-queries/issues"
+  },
+  "homepage": "https://github.com/jonathanlazaro1/jollaz-api-queries#readme"
+}
