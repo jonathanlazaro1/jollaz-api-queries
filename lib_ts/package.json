@@ -1,9 +1,9 @@
 {
   "name": "jollaz-api-queries",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "Package to consume data that comes from the JollazApiQueries C# package.",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "build": "tsc"
   },
@@ -28,5 +28,6 @@
   "bugs": {
     "url": "https://github.com/jonathanlazaro1/jollaz-api-queries/issues"
   },
-  "homepage": "https://github.com/jonathanlazaro1/jollaz-api-queries#readme"
+  "homepage": "https://github.com/jonathanlazaro1/jollaz-api-queries#readme",
+  "dependencies": {}
 }

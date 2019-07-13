@@ -1,4 +1,4 @@
 export default class OrderingItem {
-  name?: string;
+  name: string = "";
   descending: boolean = false;
 }
