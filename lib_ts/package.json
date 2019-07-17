@@ -1,7 +1,7 @@
 {
   "name": "jollaz-api-queries",
-  "version": "1.0.3",
-  "description": "Package to consume data that comes from the JollazApiQueries C# package.",
+  "version": "1.1.0",
+  "description": "Added constructors to FilterItem and DataRequest.",
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {

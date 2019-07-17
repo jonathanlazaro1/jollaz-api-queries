@@ -1,14 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const FilterCriterion_1 = require("../Options/FilterCriterion");
 class FilterItem {
-    constructor() {
-        this.name = "";
-        this.parameter = new Object();
+    constructor(name, parameter, criterion) {
         this.matchCase = false;
         this.isAdvanced = false;
         this.not = false;
-        this.criterion = FilterCriterion_1.FilterCriterion.Equal;
+        this.name = name;
+        this.parameter = parameter;
+        this.criterion = criterion;
     }
 }
 exports.default = FilterItem;

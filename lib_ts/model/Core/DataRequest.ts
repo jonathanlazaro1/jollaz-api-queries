@@ -2,9 +2,9 @@ import { FilterItem, FilterExpression, OrderingItem } from "../..";
 import { FilterOperator } from "../Options/FilterOperator";
 
 export default class DataRequest {
-  itemsPerPage: number = 1;
+  itemsPerPage: number;
 
-  currentPage: number = 0;
+  currentPage: number;
 
   filters: FilterItem[] = new Array<FilterItem>();
 
@@ -17,4 +17,9 @@ export default class DataRequest {
   select: string[] = new Array<string>();
 
   grouping: string = "";
+
+  constructor(itemsPerPage: number, currentPage: number) {
+    this.itemsPerPage = itemsPerPage;
+    this.currentPage = currentPage;
+  }
 }

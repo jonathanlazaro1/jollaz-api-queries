@@ -1,9 +1,11 @@
 import { FilterCriterion } from "../Options/FilterCriterion";
 
 export default class FilterItem {
-  name: string = "";
+  name: string;
 
-  parameter: any = new Object();
+  parameter: any;
+
+  criterion: FilterCriterion;
 
   matchCase: boolean = false;
 
@@ -11,5 +13,9 @@ export default class FilterItem {
 
   not: boolean = false;
 
-  criterion: FilterCriterion = FilterCriterion.Equal;
+  constructor(name: string, parameter: any, criterion: FilterCriterion) {
+    this.name = name;
+    this.parameter = parameter;
+    this.criterion = criterion;
+  }
 }
