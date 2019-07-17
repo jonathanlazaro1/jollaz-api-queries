@@ -7,15 +7,25 @@ export default class FilterItem {
 
   criterion: FilterCriterion;
 
-  matchCase: boolean = false;
+  matchCase: boolean;
 
-  isAdvanced: boolean = false;
+  isAdvanced: boolean;
 
-  not: boolean = false;
+  not: boolean;
 
-  constructor(name: string, parameter: any, criterion: FilterCriterion) {
+  constructor(
+    name: string,
+    parameter: any,
+    criterion: FilterCriterion,
+    matchCase = false,
+    isAdvanced = false,
+    not = false
+  ) {
     this.name = name;
     this.parameter = parameter;
     this.criterion = criterion;
+    this.matchCase = matchCase;
+    this.isAdvanced = isAdvanced;
+    this.not = not;
   }
 }
