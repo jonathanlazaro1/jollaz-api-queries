@@ -156,10 +156,8 @@ namespace JollazApiQueries.Tests.Filtering
             {
                 new FilterItem
                 {
-                    Name = "ContactInfo.Email",
-                    Criterion = FilterCriterion.Equal,
-                    Parameter = "aliciaflorick@hotmail.com",
-                    IsAdvanced = true
+                    IsAdvanced = true,
+                    AdvancedQuery = "np(ContactInfo.Email) == \"aliciaflorick@hotmail.com\""
                 }
             };
             var query = Person.GetPersonQuery();
@@ -176,15 +174,13 @@ namespace JollazApiQueries.Tests.Filtering
             {
                 FilterOperator.And
             };
-            
+
             dataRequest.Filters = new FilterItem[]
             {
                 new FilterItem
                 {
-                    Name = "Addresses.Count",
-                    Criterion = FilterCriterion.GreaterThan,
-                    Parameter = 1,
-                    IsAdvanced = true
+                    IsAdvanced = true,
+                    AdvancedQuery = "np(Addresses.Count) > 1"
                 },
                 new FilterItem
                 {

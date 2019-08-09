@@ -113,7 +113,7 @@ namespace JollazApiQueries.Library.Extensions
             {
                 var filter = filters[i];
 
-                if (filter.Parameter == null && filter.Criterion != FilterCriterion.NotNull)
+                if (filter.Parameter == null && filter.Criterion != FilterCriterion.NotNull && !filter.IsAdvanced)
                 {
                     throw new ArgumentNullException(filter.Name, $"{ResourceManagerUtils.ErrorMessages.SearchParameterIsNull}: {filter.Name}");
                 }
@@ -121,17 +121,14 @@ namespace JollazApiQueries.Library.Extensions
                 Expression auxExp = null;
                 PropertyInfo prop = null;
                 Expression notNull = null;
-                auxExp = CreateBaseExpression<T>(pe, filter.Name, out prop, out notNull);
 
                 if (filter.IsAdvanced)
                 {
                     try
                     {
-                        var criterion = FilterCriteriaUtils.GetCriterionSignByCriterion(filter.Criterion);
-
                         var parser = new ExpressionParser(
                             new ParameterExpression[] { pe },
-                            $"{filter.Name} {criterion} @0",
+                            filter.AdvancedQuery,
                             new object[] { filter.Parameter },
                             ParsingConfig.Default);
                         auxExp = parser.Parse(typeof(Boolean), false);
@@ -143,6 +140,7 @@ namespace JollazApiQueries.Library.Extensions
                 }
                 else
                 {
+                    auxExp = CreateBaseExpression<T>(pe, filter.Name, out prop, out notNull);
                     // If prop is a collection
                     if (prop.IsCollection())
                     {
@@ -197,8 +195,8 @@ namespace JollazApiQueries.Library.Extensions
                         }
                     }
                     auxExp = filter.Not ? Expression.Not(auxExp) : auxExp;
+                    auxExp = notNull != null ? Expression.AndAlso(notNull, auxExp) : auxExp;
                 }
-                auxExp = notNull != null ? Expression.AndAlso(notNull, auxExp) : auxExp;
                 exp = BindExpressions(exp, auxExp, operators.ElementAtOrDefault(i - 1));
             }
             return exp;

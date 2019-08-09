@@ -40,5 +40,7 @@ namespace JollazApiQueries.Model.Core
         /// Filter criterion by which parameter will be checked against the value of the property.
         ///</summary>
         public FilterCriterion Criterion { get; set; }
+
+        public string AdvancedQuery { get; set; }
     }
 }
