@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>JollazApiQueries.Model</PackageId>
     <Title>Jollaz Api Queries Model</Title>
-    <Version>1.1</Version>
+    <Version>2.0</Version>
     <PackageDescription></PackageDescription>
     <Authors>Jonathan Lazaro</Authors>
     <Company>Jollaz Software</Company>
@@ -19,7 +19,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.11" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.18" />
   </ItemGroup>
 
   <ItemGroup>
