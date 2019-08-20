@@ -23,5 +23,7 @@ namespace JollazApiQueries.Model.Core.Errors
         string UnableToSelect { get; }
 
         string UnableToGroup { get; }
+
+        string UnrecognizedProcessingMethod { get; }
     }
 }

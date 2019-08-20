@@ -1,7 +1,7 @@
 {
   "name": "jollaz-api-queries",
-  "version": "1.1.1",
-  "description": "FilterItem's constructor now contains all possible properties.",
+  "version": "1.2.0",
+  "description": "Added the ability to change the processing order.",
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {

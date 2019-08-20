@@ -14,7 +14,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>JollazApiQueries</PackageId>
     <Title>Jollaz Api Queries</Title>
-    <Version>2.0</Version>
+    <Version>2.1.0</Version>
     <PackageDescription></PackageDescription>
     <Authors>Jonathan Lazaro</Authors>
     <Company>Jollaz Software</Company>
@@ -24,7 +24,7 @@
     <Copyright>Copyright (c) 2019 Jonathan Lazaro</Copyright>
     <Description>A .NET Core package to help in the process of consuming query data from APIs.</Description>
     <RepositoryUrl>https://github.com/jonathanlazaro1/jollaz-api-queries</RepositoryUrl>
-    <PackageReleaseNotes>Advanced filtering is now totally controlled by the client.</PackageReleaseNotes>
+    <PackageReleaseNotes>Now the client has the ability to change the processing order.</PackageReleaseNotes>
     <PackageTags>query sorting grouping pagination filtering ordering selecting api</PackageTags>
   </PropertyGroup>
 

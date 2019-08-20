@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace JollazApiQueries.Model.Core
 {
     ///<summary>
@@ -50,5 +52,11 @@ namespace JollazApiQueries.Model.Core
         /// String that contains instructions to grouping the result data.
         ///</summary>
         public string Grouping { get; set; }
+
+        ///<summary>
+        /// Collection of processing methods, in the order they are intended to be processed.
+        ///<para>NOTE: Filtering always goes first.</para>
+        /// </summary>
+        public HashSet<ProcessingMethod> Methods { get; set; } = new HashSet<ProcessingMethod> { ProcessingMethod.Order, ProcessingMethod.Select, ProcessingMethod.Group };
     }
 }

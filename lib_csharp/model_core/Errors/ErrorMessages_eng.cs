@@ -21,7 +21,9 @@ namespace JollazApiQueries.Model.Core.Errors
         public string SearchParameterIsNull => "Search parameter cannot be null";
 
         public string UnableToSelect => "Unable to select: some of the provided properties was not found.";
-        
+
         public string UnableToGroup => "Unable to group: the instruction provided is invalid.";
+
+        public string UnrecognizedProcessingMethod => "Invalid processing method.";
     }
 }

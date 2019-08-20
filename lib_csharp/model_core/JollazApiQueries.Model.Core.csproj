@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>JollazApiQueries.Model.Core</PackageId>
     <Title>Jollaz Api Queries Core Model</Title>
-    <Version>2.0</Version>
+    <Version>2.1.0</Version>
     <PackageDescription></PackageDescription>
     <Authors>Jonathan Lazaro</Authors>
     <Company>Jollaz Software</Company>
@@ -14,7 +14,7 @@
     <Copyright>Copyright (c) 2019 Jonathan Lazaro</Copyright>
     <Description>This is the JollazApiQueries core model package.</Description>
     <RepositoryUrl>https://github.com/jonathanlazaro1/jollaz-api-queries</RepositoryUrl>
-    <PackageReleaseNotes>Added property AdvancedFilter, to allow full customization of advanced filters.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added enum ProcessingMethod, to allow changing of the processing methods order.</PackageReleaseNotes>
     <PackageTags>query sorting grouping pagination filtering ordering selecting api</PackageTags>
   </PropertyGroup>
 

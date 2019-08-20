@@ -4,6 +4,7 @@ using System.Linq;
 using System;
 using System.Linq.Dynamic.Core;
 using JollazApiQueries.Model.Core;
+using System.Collections.Generic;
 
 namespace JollazApiQueries.Tests.Filtering
 {
@@ -283,6 +284,29 @@ namespace JollazApiQueries.Tests.Filtering
             {
                 var newQuery = query.FilterByDataRequest(dataRequest);
             });
+        }
+
+        [TestMethod]
+        public void TestIfChangingMethodProcessingOrderWorks()
+        {
+            var dataRequest = TestCommons.CreateDataRequest();
+            dataRequest.Methods = new HashSet<ProcessingMethod> { ProcessingMethod.Group, ProcessingMethod.Select, ProcessingMethod.Order };
+            dataRequest.Grouping = "BirthCountry";
+
+            dataRequest.Select = new string[] { "Key as Country", "Values.Count as PeopleCount" };
+
+            dataRequest.Ordering = new OrderingItem[] { new OrderingItem { Name = "Country" } };
+
+
+            var query = Person.GetPersonQuery();
+            var result = query.Proccess(dataRequest);
+
+            // Three countries: Fantasy Land, Russia, United States
+            Assert.AreEqual(3, result.Items.Count());
+            // Ordered by BirthCountry, so Fantasy Land must be the first item
+            Assert.AreEqual("Fantasy Land", result.Items.First().Country);
+            // Ordered by BirthCountry, so USA must be the last item
+            Assert.AreEqual(3, result.Items.Last().PeopleCount);
         }
     }
 }

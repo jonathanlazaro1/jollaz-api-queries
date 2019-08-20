@@ -1,5 +1,6 @@
 import { FilterItem, FilterExpression, OrderingItem } from "../..";
 import { FilterOperator } from "../Options/FilterOperator";
+import { ProcessingMethod } from "../Options/ProcessingMethod";
 
 export default class DataRequest {
   itemsPerPage: number;
@@ -17,6 +18,12 @@ export default class DataRequest {
   select: string[] = new Array<string>();
 
   grouping: string = "";
+
+  methods: ProcessingMethod[] = new Array<ProcessingMethod>(
+    ProcessingMethod.Order,
+    ProcessingMethod.Select,
+    ProcessingMethod.Group
+  );
 
   constructor(itemsPerPage: number, currentPage: number) {
     this.itemsPerPage = itemsPerPage;
