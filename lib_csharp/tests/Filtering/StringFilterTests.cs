@@ -26,7 +26,7 @@ namespace JollazApiQueries.Tests.Filtering
             var query = Person.GetPersonQuery();
 
             var newQuery = query.FilterByDataRequest(dataRequest);
-            
+
             Assert.AreEqual(1, newQuery.Count());
             Assert.AreEqual(newQuery.First().Name, "John Doe");
         }
@@ -47,7 +47,7 @@ namespace JollazApiQueries.Tests.Filtering
             var query = Person.GetPersonQuery();
 
             var newQuery = query.FilterByDataRequest(dataRequest);
-            
+
             Assert.AreEqual(2, newQuery.Count());
         }
 
@@ -67,7 +67,7 @@ namespace JollazApiQueries.Tests.Filtering
             var query = Person.GetPersonQuery();
 
             var newQuery = query.FilterByDataRequest(dataRequest);
-            
+
             Assert.AreEqual(1, newQuery.Count());
             Assert.AreEqual("White Death", newQuery.First().Name);
         }
@@ -88,12 +88,12 @@ namespace JollazApiQueries.Tests.Filtering
             var query = Person.GetPersonQuery();
 
             var newQuery = query.FilterByDataRequest(dataRequest);
-            
+
             Assert.AreEqual(1, newQuery.Count());
             Assert.AreEqual("Snow White", newQuery.First().Name);
         }
 
-        [TestMethod]        
+        [TestMethod]
         public void TestIfMatchCaseAffectsStringDataResults()
         {
             var dataRequest = TestCommons.CreateDataRequest();
@@ -110,8 +110,28 @@ namespace JollazApiQueries.Tests.Filtering
             var query = Person.GetPersonQuery();
 
             var newQuery = query.FilterByDataRequest(dataRequest);
-            
+
             Assert.AreEqual(0, newQuery.Count());
+        }
+
+        [TestMethod]
+        public void TestIfDiacriticsAreIgnored()
+        {
+            var dataRequest = TestCommons.CreateDataRequest();
+            dataRequest.Filters = new FilterItem[]
+            {
+                new FilterItem
+                {
+                    Name = "Name",
+                    Criterion = FilterCriterion.StringContains,
+                    Parameter = "joão da sílva conceição",
+                }
+            };
+            var query = Person.GetPersonQuery();
+
+            var newQuery = query.FilterByDataRequest(dataRequest);
+
+            Assert.AreEqual(1, newQuery.Count());
         }
 
         [TestMethod]

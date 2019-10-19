@@ -301,10 +301,10 @@ namespace JollazApiQueries.Tests.Filtering
             var query = Person.GetPersonQuery();
             var result = query.Proccess(dataRequest);
 
-            // Three countries: Fantasy Land, Russia, United States
-            Assert.AreEqual(3, result.Items.Count());
-            // Ordered by BirthCountry, so Fantasy Land must be the first item
-            Assert.AreEqual("Fantasy Land", result.Items.First().Country);
+            // Four countries: Brazil, Fantasy Land, Russia, United States
+            Assert.AreEqual(4, result.Items.Count());
+            // Ordered by BirthCountry, so Brazil must be the first item
+            Assert.AreEqual("Brazil", result.Items.First().Country);
             // Ordered by BirthCountry, so USA must be the last item
             Assert.AreEqual(3, result.Items.Last().PeopleCount);
         }

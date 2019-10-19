@@ -26,7 +26,7 @@ namespace JollazApiQueries.Tests.Filtering
             var query = Person.GetPersonQuery();
 
             var newQuery = query.FilterByDataRequest(dataRequest);
-            
+
             Assert.AreEqual(1, newQuery.Count());
             Assert.AreEqual("Peter Pan", newQuery.First().Name);
         }
@@ -47,8 +47,8 @@ namespace JollazApiQueries.Tests.Filtering
             var query = Person.GetPersonQuery();
 
             var newQuery = query.FilterByDataRequest(dataRequest);
-            
-            Assert.AreEqual(4, newQuery.Count());
+
+            Assert.AreEqual(5, newQuery.Count());
         }
 
         [TestMethod]

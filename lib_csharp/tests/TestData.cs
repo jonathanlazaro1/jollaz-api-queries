@@ -81,6 +81,18 @@ namespace JollazApiQueries.Tests
                 },
                 new Person
                 {
+                    Name = "João da Sílva Conceição Menêzes",
+                    BirthDate = new DateTime(DateTime.Now.Year - 36, 1, 1),
+                    BirthCountry = "Brazil",
+                    Gender = Gender.Male,
+                    ContactInfo = new ContactInfo { Telephone = "(99)98765-4321", Email = "joaodasilva@gmail.com" },
+                    Addresses =
+                    {
+                        new PersonAdress { AddressLine1 = "Rua das Flores", AddressLine2 = "9876" }
+                    }
+                },
+                new Person
+                {
                     Name = "John Doe",
                     BirthDate = new DateTime(DateTime.Now.Year - 21, 1, 1),
                     BirthCountry = "United States",

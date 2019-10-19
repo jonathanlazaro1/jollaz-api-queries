@@ -26,7 +26,7 @@ namespace JollazApiQueries.Tests.Filtering
             var query = Person.GetPersonQuery();
 
             var newQuery = query.FilterByDataRequest(dataRequest);
-            
+
             Assert.AreEqual(1, newQuery.Count());
             Assert.AreEqual(newQuery.First().Name, "John Doe");
         }
@@ -47,8 +47,8 @@ namespace JollazApiQueries.Tests.Filtering
             var query = Person.GetPersonQuery();
 
             var newQuery = query.FilterByDataRequest(dataRequest);
-            
-            Assert.AreEqual(4, newQuery.Count());
+
+            Assert.AreEqual(5, newQuery.Count());
         }
 
         [TestMethod]
@@ -67,8 +67,8 @@ namespace JollazApiQueries.Tests.Filtering
             var query = Person.GetPersonQuery();
 
             var newQuery = query.FilterByDataRequest(dataRequest);
-            
-            Assert.AreEqual(3, newQuery.Count());
+
+            Assert.AreEqual(4, newQuery.Count());
         }
 
         [TestMethod]
@@ -87,8 +87,8 @@ namespace JollazApiQueries.Tests.Filtering
             var query = Person.GetPersonQuery();
 
             var newQuery = query.FilterByDataRequest(dataRequest);
-            
-            Assert.AreEqual(3, newQuery.Count());
+
+            Assert.AreEqual(4, newQuery.Count());
         }
 
         [TestMethod]
@@ -107,8 +107,8 @@ namespace JollazApiQueries.Tests.Filtering
             var query = Person.GetPersonQuery();
 
             var newQuery = query.FilterByDataRequest(dataRequest);
-            
-            Assert.AreEqual(2, newQuery.Count());
+
+            Assert.AreEqual(3, newQuery.Count());
         }
 
         [TestMethod]

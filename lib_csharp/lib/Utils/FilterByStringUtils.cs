@@ -10,7 +10,9 @@ namespace JollazApiQueries.Library.Utils
     {
         public static Expression FilterByString(Expression exp, PropertyInfo prop, FilterItem filter)
         {
-            string parameter = filter.Parameter.ToString();
+            string parameter = filter.Parameter.ToString().RemoveDiacritics();
+            MethodInfo removeDiacritics = typeof(StringUtils).GetMethod("RemoveDiacritics", BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static);
+            exp = Expression.Call(removeDiacritics, exp);
 
             // Makes param and exp lowercase, if specified in the filter
             if (!filter.MatchCase)

@@ -5,7 +5,7 @@ using System;
 using System.Linq.Dynamic.Core;
 using JollazApiQueries.Model.Core;
 
-namespace JollazApiQueries.Tests.Selecting
+namespace JollazApiQueries.Tests.Grouping
 {
     [TestClass]
     public class GroupingTests
@@ -22,14 +22,14 @@ namespace JollazApiQueries.Tests.Selecting
                     Name = "BirthCountry"
                 }
             };
-            
+
             var result = Person.GetPersonQuery()
                 .Proccess(dataRequest);
 
-            // Three countries: Fantasy Land, Russia, United States
-            Assert.AreEqual(3, result.Items.ToDynamicList().Count());
+            // Four countries: Brazil, Fantasy Land, Russia, United States
+            Assert.AreEqual(4, result.Items.ToDynamicList().Count());
             // Ordered by BirthCountry, so Fantasy Land must be the first group
-            Assert.AreEqual("Fantasy Land", result.Items.ToDynamicList().First().Key);
+            Assert.AreEqual("Brazil", result.Items.ToDynamicList().First().Key);
         }
 
         [TestMethod]
@@ -49,7 +49,7 @@ namespace JollazApiQueries.Tests.Selecting
                     Name = "BirthCountry"
                 }
             };
-            
+
             var query = Person.GetPersonQuery();
 
             var result = query.Proccess(dataRequest);
@@ -58,7 +58,7 @@ namespace JollazApiQueries.Tests.Selecting
             Two genders: (M)Male, (F)Female
             Four groups: M-RUS, M-US, F-FL, F-US
              */
-            Assert.AreEqual(4, result.Items.AsQueryable().Count());
+            Assert.AreEqual(5, result.Items.AsQueryable().Count());
             // Ordered by Gender dsc/BirthCountry asc
             Assert.AreEqual("Snow White", result.Items.ToDynamicList<GroupedData>().First().Values.First().Name);
         }
@@ -85,7 +85,7 @@ namespace JollazApiQueries.Tests.Selecting
                     Descending = true
                 }
             };
-            
+
             var query = Person.GetPersonQuery();
             var newQuery = query
                 .OrderByDataRequest(dataRequest)
