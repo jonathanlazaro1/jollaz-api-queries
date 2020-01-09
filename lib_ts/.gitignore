@@ -1,7 +1,6 @@
 *.d.ts
+*.js
 !index.d.ts
-model/*.js
-index.js
-Output/*
-!Output/package.json
-!Output/package-lock.json
+build/*
+!build/package.json
+!build/package-lock.json

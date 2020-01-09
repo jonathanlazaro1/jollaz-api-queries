@@ -1,6 +1,6 @@
 {
   "name": "jollaz-api-queries",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Added the ability to change the processing order.",
   "main": "index.js",
   "types": "index.d.ts",
